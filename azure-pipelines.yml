@@ -12,7 +12,7 @@ pool:
 steps:
 - task: Gradle@2
   inputs:
-    workingDirectory: '$(System.DefaultWorkingDirectory)/**/ScrollingText'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/ScrollingText'
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
     publishJUnitResults: false
