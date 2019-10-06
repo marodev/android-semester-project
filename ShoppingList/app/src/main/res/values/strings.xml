@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ShoppingList</string>
+    <string name="hint">Add an item to button</string>
+    <string name="add_item">Add Item</string>
+    <string name="chicken">Chicken</string>
+    <string name="yogurt">Yogurt</string>
+    <string name="cheese">Cheese</string>
+    <string name="butter">Butter</string>
+    <string name="bean">Bean</string>
+    <string name="sugar">Sugar</string>
+    <string name="apple">Apple</string>
+    <string name="banana">Banana</string>
+    <string name="noodles">Noodles</string>
+    <string name="rice">Rice</string>
+</resources>
