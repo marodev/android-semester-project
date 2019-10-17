@@ -1,14 +1,11 @@
 package com.example.shoppinglist;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,13 +26,12 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE =
             "com.example.shoppinglist.extra.MESSAGE";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editItems = new ArrayList<>();
+        editItems = new ArrayList<>(10);
         itemOne = findViewById(R.id.editTextItemOne);
         itemTwo = findViewById(R.id.editTextItemTwo);
         itemThree = findViewById(R.id.editTextItemThree);
@@ -58,93 +54,25 @@ public class MainActivity extends AppCompatActivity {
         editItems.add(itemNine);
         editItems.add(itemTen);
 
-        if (savedInstanceState != null) {
-            boolean isVisible =
-                    savedInstanceState.getBoolean("reply_visible");
-
-            if (isVisible) {
-                itemOne.setText(savedInstanceState
-                        .getString("reply_text"));
-                itemOne.setVisibility(View.VISIBLE);
-            }
-            boolean isVisible2 =
-                    savedInstanceState.getBoolean("reply_visible2");
-
-            if (isVisible2) {
-                itemTwo.setText(savedInstanceState
-                        .getString("reply_text2"));
-                itemTwo.setVisibility(View.VISIBLE);
-            }
-            boolean isVisible3 =
-                    savedInstanceState.getBoolean("reply_visible3");
-
-            if (isVisible3) {
-                itemThree.setText(savedInstanceState
-                        .getString("reply_text3"));
-                itemThree.setVisibility(View.VISIBLE);
-            }
-            boolean isVisible4 =
-                    savedInstanceState.getBoolean("reply_visible4");
-
-            if (isVisible4) {
-                itemFour.setText(savedInstanceState
-                        .getString("reply_text4"));
-                itemFour.setVisibility(View.VISIBLE);
-            }
-            boolean isVisible5 =
-                    savedInstanceState.getBoolean("reply_visible5");
-
-            if (isVisible5) {
-                itemFive.setText(savedInstanceState
-                        .getString("reply_text5"));
-                itemFive.setVisibility(View.VISIBLE);
-            }
-            boolean isVisible6 =
-                    savedInstanceState.getBoolean("reply_visible6");
-
-            if (isVisible6) {
-                itemSix.setText(savedInstanceState
-                        .getString("reply_text6"));
-                itemSix.setVisibility(View.VISIBLE);
-            }
-            boolean isVisible7 =
-                    savedInstanceState.getBoolean("reply_visible7");
-
-            if (isVisible7) {
-                itemSeven.setText(savedInstanceState
-                        .getString("reply_text7"));
-                itemSeven.setVisibility(View.VISIBLE);
-            }
-            boolean isVisible8 =
-                    savedInstanceState.getBoolean("reply_visible8");
-
-            if (isVisible8) {
-                itemEight.setText(savedInstanceState
-                        .getString("reply_text8"));
-                itemEight.setVisibility(View.VISIBLE);
-            }
-            boolean isVisible9 =
-                    savedInstanceState.getBoolean("reply_visible9");
-
-            if (isVisible9) {
-                itemNine.setText(savedInstanceState
-                        .getString("reply_text9"));
-                itemNine.setVisibility(View.VISIBLE);
-            }
-            boolean isVisible10 =
-                    savedInstanceState.getBoolean("reply_visible10");
-
-            if (isVisible10) {
-                itemTen.setText(savedInstanceState
-                        .getString("reply_text10"));
-                itemTen.setVisibility(View.VISIBLE);
-            }
+        if (savedInstanceState == null) {
+            return;
         }
 
+        for (int i = 0; i < editItems.size() - 1; i++) {
+            boolean isVisible =
+                    savedInstanceState.getBoolean("reply_visible" + i);
+
+            if (!isVisible) {
+                break;
+            }
+
+            TextView view = editItems.get(i);
+            view.setText(savedInstanceState.getString("reply_text" + i));
+            view.setVisibility(View.VISIBLE);
+        }
     }
 
     public void addItem(View view) {
-
         Intent intent = new Intent(this, SecondActivity.class);
         startActivityForResult(intent, TEXT_REQUEST);
 
@@ -153,20 +81,23 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode,
                                  int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == TEXT_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                String reply =
-                        data.getStringExtra(SecondActivity.EXTRA_REPLY);
-              //  itemOne.setText(reply);
-                for (TextView editItem: editItems){
-                    if (editItem.getVisibility() == View.VISIBLE){
-                        continue;
-                    }else{
-                        editItem.setText(reply);
-                        editItem.setVisibility(View.VISIBLE);
-                        break;
-                    }
-                }
+
+        if (requestCode != TEXT_REQUEST) {
+            return;
+        }
+
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+
+        String reply =
+                data.getStringExtra(SecondActivity.EXTRA_REPLY);
+
+        for (TextView editItem : editItems) {
+            if (editItem.getVisibility() != View.VISIBLE) {
+                editItem.setText(reply);
+                editItem.setVisibility(View.VISIBLE);
+                break;
             }
         }
     }
@@ -175,65 +106,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        if (itemOne.getVisibility() == View.VISIBLE) {
-            outState.putBoolean("reply_visible", true);
-            outState.putString("reply_text",
-                    itemOne.getText().toString());
+        for (int i = 0; i < editItems.size() - 1; i++) {
+            TextView view = editItems.get(i);
 
-        }
-        if (itemTwo.getVisibility() == View.VISIBLE) {
-            outState.putBoolean("reply_visible2", true);
-            outState.putString("reply_text2",
-                    itemTwo.getText().toString());
+            if (view.getVisibility() != View.VISIBLE) {
+                break;
+            }
 
-        }
-        if (itemThree.getVisibility() == View.VISIBLE) {
-            outState.putBoolean("reply_visible3", true);
-            outState.putString("reply_text3",
-                    itemThree.getText().toString());
-
-        }
-        if (itemFour.getVisibility() == View.VISIBLE) {
-            outState.putBoolean("reply_visible4", true);
-            outState.putString("reply_text4",
-                    itemFour.getText().toString());
-
-        }
-        if (itemFive.getVisibility() == View.VISIBLE) {
-            outState.putBoolean("reply_visible5", true);
-            outState.putString("reply_text5",
-                    itemFive.getText().toString());
-
-        }
-        if (itemSix.getVisibility() == View.VISIBLE) {
-            outState.putBoolean("reply_visible6", true);
-            outState.putString("reply_text6",
-                    itemSix.getText().toString());
-
-        }
-        if (itemSeven.getVisibility() == View.VISIBLE) {
-            outState.putBoolean("reply_visible7", true);
-            outState.putString("reply_text7",
-                    itemSeven.getText().toString());
-
-        }
-        if (itemEight.getVisibility() == View.VISIBLE) {
-            outState.putBoolean("reply_visible8", true);
-            outState.putString("reply_text8",
-                    itemEight.getText().toString());
-
-        }
-        if (itemNine.getVisibility() == View.VISIBLE) {
-            outState.putBoolean("reply_visible9", true);
-            outState.putString("reply_text9",
-                    itemNine.getText().toString());
-
-        }
-        if (itemTen.getVisibility() == View.VISIBLE) {
-            outState.putBoolean("reply_visible10", true);
-            outState.putString("reply_text10",
-                    itemTen.getText().toString());
-
+            outState.putBoolean("reply_visible" + i, true);
+            outState.putString("reply_text" + i, view.getText().toString());
         }
     }
 }
