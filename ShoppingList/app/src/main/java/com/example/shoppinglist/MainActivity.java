@@ -1,14 +1,11 @@
 package com.example.shoppinglist;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,14 +67,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
             TextView view = editItems.get(i);
-            view.setText(savedInstanceState
-                    .getString("reply_text" + i));
+            view.setText(savedInstanceState.getString("reply_text" + i));
             view.setVisibility(View.VISIBLE);
         }
     }
 
     public void addItem(View view) {
-
         Intent intent = new Intent(this, SecondActivity.class);
         startActivityForResult(intent, TEXT_REQUEST);
 
@@ -119,8 +114,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             outState.putBoolean("reply_visible" + i, true);
-            outState.putString("reply_text" + i,
-                    view.getText().toString());
+            outState.putString("reply_text" + i, view.getText().toString());
         }
     }
 }
