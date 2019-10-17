@@ -6,103 +6,114 @@
     android:layout_height="match_parent"
     tools:context=".SecondActivity">
 
-    <Button
-        android:id="@+id/buttonItemOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onButtonClicked"
-        android:text="@string/rice"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/buttonItemTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/noodles"
-        android:onClick="onButtonClicked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonItemOne" />
+            <Button
+                android:id="@+id/buttonItemOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onButtonClicked"
+                android:text="@string/rice"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/buttonItemThree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/banana"
-        android:onClick="onButtonClicked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonItemTwo" />
+            <Button
+                android:id="@+id/buttonItemTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/noodles"
+                android:onClick="onButtonClicked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonItemOne" />
 
-    <Button
-        android:id="@+id/buttonItemFour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/apple"
-        android:onClick="onButtonClicked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonItemThree" />
+            <Button
+                android:id="@+id/buttonItemThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/banana"
+                android:onClick="onButtonClicked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonItemTwo" />
 
-    <Button
-        android:id="@+id/buttonItemFive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sugar"
-        android:onClick="onButtonClicked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonItemFour" />
+            <Button
+                android:id="@+id/buttonItemFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apple"
+                android:onClick="onButtonClicked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonItemThree" />
 
-    <Button
-        android:id="@+id/buttonItemSix"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/bean"
-        android:onClick="onButtonClicked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonItemFive" />
+            <Button
+                android:id="@+id/buttonItemFive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sugar"
+                android:onClick="onButtonClicked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonItemFour" />
 
-    <Button
-        android:id="@+id/buttonItemSeven"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/butter"
-        android:onClick="onButtonClicked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonItemSix" />
+            <Button
+                android:id="@+id/buttonItemSix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bean"
+                android:onClick="onButtonClicked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonItemFive" />
 
-    <Button
-        android:id="@+id/buttonItemEight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cheese"
-        android:onClick="onButtonClicked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonItemSeven" />
+            <Button
+                android:id="@+id/buttonItemSeven"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/butter"
+                android:onClick="onButtonClicked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonItemSix" />
 
-    <Button
-        android:id="@+id/buttonItemNine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/yogurt"
-        android:onClick="onButtonClicked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonItemEight" />
+            <Button
+                android:id="@+id/buttonItemEight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cheese"
+                android:onClick="onButtonClicked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonItemSeven" />
 
-    <Button
-        android:id="@+id/buttonItemTen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/chicken"
-        android:onClick="onButtonClicked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonItemNine" />
+            <Button
+                android:id="@+id/buttonItemNine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yogurt"
+                android:onClick="onButtonClicked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonItemEight" />
+
+            <Button
+                android:id="@+id/buttonItemTen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chicken"
+                android:onClick="onButtonClicked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonItemNine" />
+            
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
