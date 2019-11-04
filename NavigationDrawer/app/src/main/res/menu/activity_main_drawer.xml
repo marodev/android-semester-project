@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/your_orders"
+            android:icon="@drawable/ic_add_shopping_cart_black_24dp"
+            android:title="@string/menu_your_orders" />
+        <item
+            android:id="@+id/buy_again"
+            android:icon="@drawable/ic_shop_two_black_24dp"
+            android:title="@string/menu_buy_again" />
+        <item
+            android:id="@+id/your_wish_list"
+            android:icon="@drawable/ic_wish_list_24dp"
+            android:title="@string/menu_your_wish_list" />
+        <item
+            android:id="@+id/your_account"
+            android:icon="@drawable/ic_account_24dp"
+            android:title="@string/menu_your_account" />
+    </group>
+
+    <item android:title="@string/menu_communicate">
+        <menu>
+            <item
+                android:id="@+id/todays_deal"
+                android:icon="@drawable/ic_todays_deal_24dp"
+                android:title="@string/menu_today_s_deals" />
+            <item
+                android:id="@+id/gift_cards"
+                android:icon="@drawable/ic_giftcard_24dp"
+                android:title="@string/menu_gift_cards" />
+            <item
+                android:id="@+id/shop_family"
+                android:icon="@drawable/ic_family_24dp"
+                android:title="@string/menu_shop_family" />
+            <item
+                android:id="@+id/customer_service"
+                android:icon="@drawable/ic_customer_service_24dp"
+                android:title="@string/menu_customer_service" />
+            <item
+                android:id="@+id/notifications"
+                android:icon="@drawable/ic_notifications_24dp"
+                android:title="@string/menu_notifications" />
+            <item
+                android:id="@+id/legal"
+                android:icon="@drawable/ic_legal_24dp"
+                android:title="@string/menu_legal" />
+        </menu>
+    </item>
+
+</menu>
