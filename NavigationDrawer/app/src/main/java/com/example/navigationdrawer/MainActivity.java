@@ -10,10 +10,6 @@ import android.view.View;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -25,8 +21,13 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    Map<Integer, String> toastMessages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
@@ -52,10 +53,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(this);
         }
+
+        initializeToastMessages();
+    }
+
+    private void initializeToastMessages() {
+        toastMessages = new HashMap<Integer, String>() {{
+            put(R.id.nav_home, getString(R.string.home_message));
+            put(R.id.your_orders, getString(R.string.your_orders_message));
+            put(R.id.your_account, getString(R.string.your_account_message));
+            put(R.id.your_wish_list, getString(R.string.your_wish_list_message));
+            put(R.id.buy_again, getString(R.string.buy_again_message));
+            put(R.id.todays_deal, getString(R.string.today_s_deals_message));
+            put(R.id.gift_cards, getString(R.string.gift_cards_message));
+            put(R.id.shop_family, getString(R.string.shop_family_message));
+            put(R.id.customer_service, getString(R.string.customer_service_message));
+            put(R.id.notifications, getString(R.string.notifications_message));
+            put(R.id.legal, getString(R.string.legal_message));
+
+        }};
     }
 
     @Override
@@ -71,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer != null) {
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
@@ -80,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -93,54 +114,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-                drawer.closeDrawer(GravityCompat.START);
-                displayToast(getString(R.string.home_message));
-                return true;
-            case R.id.your_orders:
-                drawer.closeDrawer(GravityCompat.START);
-                displayToast(getString(R.string.your_orders_message));
-                return true;
-            case R.id.your_account:
-                drawer.closeDrawer(GravityCompat.START);
-                displayToast(getString(R.string.your_account_message));
-                return true;
-            case R.id.your_wish_list:
-                drawer.closeDrawer(GravityCompat.START);
-                displayToast(getString(R.string.your_wish_list_message));
-                return true;
-            case R.id.buy_again:
-                drawer.closeDrawer(GravityCompat.START);
-                displayToast(getString(R.string.buy_again_message));
-                return true;
-            case R.id.todays_deal:
-                drawer.closeDrawer(GravityCompat.START);
-                displayToast(getString(R.string.today_s_deals_message));
-                return true;
-            case R.id.gift_cards:
-                drawer.closeDrawer(GravityCompat.START);
-                displayToast(getString(R.string.gift_cards_message));
-                return true;
-            case R.id.shop_family:
-                drawer.closeDrawer(GravityCompat.START);
-                displayToast(getString(R.string.shop_family_message));
-                return true;
-            case R.id.customer_service:
-                drawer.closeDrawer(GravityCompat.START);
-                displayToast(getString(R.string.customer_service_message));
-                return true;
-            case R.id.notifications:
-                drawer.closeDrawer(GravityCompat.START);
-                displayToast(getString(R.string.notifications_message));
-                return true;
-            case R.id.legal:
-                drawer.closeDrawer(GravityCompat.START);
-                displayToast(getString(R.string.legal_message));
-                return true;
-            default:
-                return false;
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
+        if (!toastMessages.containsKey(item.getItemId())) {
+            return false;
         }
+
+        drawer.closeDrawer(GravityCompat.START);
+        displayToast(toastMessages.get(item.getItemId()));
+
+        return true;
     }
 }

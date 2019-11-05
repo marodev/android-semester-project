@@ -28,3 +28,13 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'build'
+
+
+- task: Gradle@2
+  inputs:
+    workingDirectory: 'NavigationDrawer'
+    gradleWrapperFile: 'NavigationDrawer/gradlew'
+    gradleOptions: '-Xmx3072m'
+    publishJUnitResults: false
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'build'
