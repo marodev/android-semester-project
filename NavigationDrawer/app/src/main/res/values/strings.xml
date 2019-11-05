@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Navigation Drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">USIDroidr</string>
+    <string name="nav_header_subtitle">github.com/marodev/android-semester-project</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_legal">Legal</string>
+    <string name="menu_notifications">Notifications</string>
+    <string name="menu_customer_service">Customer Service</string>
+    <string name="menu_shop_family">Shop Family</string>
+    <string name="menu_gift_cards">Gift Cards</string>
+    <string name="menu_today_s_deals">Today\'s Deals</string>
+    <string name="menu_communicate">Communicate</string>
+    <string name="menu_your_account">Your Account</string>
+    <string name="menu_your_wish_list">Your Wish List</string>
+    <string name="menu_buy_again">Buy Again</string>
+    <string name="menu_your_orders">Your Orders</string>
+
+
+    <string name="home_message">you chose Home</string>
+    <string name="legal_message">You chose Legal</string>
+    <string name="notifications_message">You chose Notifications</string>
+    <string name="customer_service_message">You chose Customer Service</string>
+    <string name="shop_family_message">You chose Shop Family</string>
+    <string name="gift_cards_message">You chose Gift Cards</string>
+    <string name="today_s_deals_message">You chose Today\'s Deals</string>
+    <string name="your_account_message">You chose Your Account</string>
+    <string name="your_wish_list_message">You chose Your Wish List</string>
+    <string name="buy_again_message">You chose Buy Again</string>
+    <string name="your_orders_message">You chose Your Orders</string>
+</resources>

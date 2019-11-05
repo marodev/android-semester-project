@@ -18,3 +18,13 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'build'
+
+
+- task: Gradle@2
+  inputs:
+    workingDirectory: 'WhoWroteItLoader'
+    gradleWrapperFile: 'WhoWroteItLoader/gradlew'
+    gradleOptions: '-Xmx3072m'
+    publishJUnitResults: false
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'build'
