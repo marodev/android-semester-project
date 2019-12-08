@@ -10,6 +10,12 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * The api client to retrieve the remote data, based on Retrofit
+ *
+ * @see <a href="https://square.github.io/retrofit>https://square.github.io/retrofit</a></a>
+ * inspired by @see <a href="https://medium.com/@prakash_pun/retrofit-a-simple-android-tutorial-48437e4e5a23">Retrofit— A simple Android tutorial</a>
+ */
 public class ApiClient {
 
     private static Retrofit retrofit;
@@ -26,14 +32,26 @@ public class ApiClient {
         return retrofit;
     }
 
+
+    /**
+     * @return OkHttpClient
+     * @see <a href="https://square.github.io/okhttp/">OkHttpClient</a>
+     */
     private static OkHttpClient provideOkHttpClient() {
         return new OkHttpClient.Builder()
-                .addInterceptor(provideInterceptor())
-                .addInterceptor(provideHttpLoggingInterceptor())
+                .addInterceptor(getInterceptor())
+                .addInterceptor(getHttpLoggingInterceptor())
                 .build();
     }
 
-    private static Interceptor provideInterceptor() {
+
+    /**
+     * the key is stored in a file called .api.key.properties
+     *
+     * @return http interceptor for adding the api key to each http request
+     * @see <a href="https://square.github.io/okhttp/interceptors/">OkHttp Interceptor</a>
+     */
+    private static Interceptor getInterceptor() {
         return chain -> {
             Request modifiedRequest = chain.request().newBuilder()
                     .addHeader("user-key", BuildConfig.apikey)
@@ -43,10 +61,11 @@ public class ApiClient {
         };
     }
 
-    private static HttpLoggingInterceptor provideHttpLoggingInterceptor() {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        return loggingInterceptor;
+    /**
+     * @return http body interceptor
+     */
+    private static HttpLoggingInterceptor getHttpLoggingInterceptor() {
+        return new HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 }
