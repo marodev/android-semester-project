@@ -1,4 +1,4 @@
-package com.restervator.api;
+package com.restervator.api.core;
 
 
 import com.restervator.BuildConfig;
@@ -14,18 +14,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * The api client to retrieve the remote data, based on Retrofit
  *
  * @see <a href="https://square.github.io/retrofit>https://square.github.io/retrofit</a></a>
+ * <p>
  * inspired by @see <a href="https://medium.com/@prakash_pun/retrofit-a-simple-android-tutorial-48437e4e5a23">Retrofit— A simple Android tutorial</a>
  */
 public class ApiClient {
 
-    private static Retrofit retrofit;
     private static final String BASE_URL = "https://developers.zomato.com";
+    private static Retrofit retrofit;
 
     public static Retrofit getApiClient() {
         if (retrofit == null) {
             retrofit = new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .client(provideOkHttpClient())
+                    .client(getOkHttpClient())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
@@ -34,10 +35,10 @@ public class ApiClient {
 
 
     /**
-     * @return OkHttpClient
+     * @return OkHttpClient with interceptors
      * @see <a href="https://square.github.io/okhttp/">OkHttpClient</a>
      */
-    private static OkHttpClient provideOkHttpClient() {
+    private static OkHttpClient getOkHttpClient() {
         return new OkHttpClient.Builder()
                 .addInterceptor(getInterceptor())
                 .addInterceptor(getHttpLoggingInterceptor())
@@ -62,7 +63,7 @@ public class ApiClient {
     }
 
     /**
-     * @return http body interceptor
+     * @return http interceptor to log the body of a http request
      */
     private static HttpLoggingInterceptor getHttpLoggingInterceptor() {
         return new HttpLoggingInterceptor()

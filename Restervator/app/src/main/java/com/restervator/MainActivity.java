@@ -1,14 +1,49 @@
 package com.restervator;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.restervator.api.ApiResponseListener;
+import com.restervator.api.ZomatoClient;
+import com.restervator.model.Restaurant;
+import com.restervator.model.RestaurantCollection;
+import com.restervator.model.SearchResponse;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Optional;
+
+public class MainActivity extends AppCompatActivity implements ApiResponseListener {
+
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+        ZomatoClient client = new ZomatoClient(this);
+        client.search();
+    }
+
+    @Override
+    public void onSearchResponse(SearchResponse response) {
+
+        // example usage:
+        Optional<RestaurantCollection> firstResult = response.getRestaurants().stream().findFirst();
+
+        if(firstResult.isPresent()) {
+            Restaurant firstRestaurant = firstResult.get().getRestaurant();
+            Log.d(LOG_TAG, firstRestaurant.getName());
+            Log.d(LOG_TAG, firstRestaurant.getLocation().getFullAddress());
+            Log.d(LOG_TAG, firstRestaurant.getUserRating().getAverageRating());
+            // ...
+        }
     }
 }
