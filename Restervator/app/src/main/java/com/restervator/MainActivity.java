@@ -16,11 +16,13 @@ import java.util.Optional;
 public class MainActivity extends AppCompatActivity implements ApiResponseListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private ZomatoClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        client = new ZomatoClient(this);
     }
 
     @Override
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements ApiResponseListen
         super.onResume();
 
 
-        ZomatoClient client = new ZomatoClient(this);
+
         client.search();
     }
 
