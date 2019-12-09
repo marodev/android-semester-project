@@ -16,13 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".MapActivity"
+        <activity
+            android:name=".MapActivity"
             android:label="Map Activity"
             android:parentActivityName=".Booking"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.restervator.RestaurantActivity"/>
+                android:value="com.restervator.RestaurantActivity" />
         </activity>
         <activity
             android:name=".Booking"
