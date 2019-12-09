@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Restervator</string>
+    <string name="title_activity_restaurant">RestaurantActivity</string>
+    <string name="book_a_table"> Book a table </string>
+    <string name="restaurant">Restaurant</string>
+    <string name="extended_fab_content_desc">When this button is clicked, it is supposed to go to the activity where you book a table </string>
+    <string name="full_image_of_a_restaurant">Full image of a restaurant</string>
+    <string name="restaurant_name">Ristorante Cantinone</string>
+    <string name="restaurant_address">Via Zurigo 3, 6900 Lugano</string>
+    <string name="restaurant_city">Milan</string>
+    <string name="restaurant_phone">0774293749</string>
+    <string name="date">Select date</string>
+    <string name="time">Select time</string>
+    <string name="evening_3_to_5">3-5pm</string>
+    <string name="evening_5_to_7">5-7pm</string>
+    <string name="evening_7_to_9">7-9pm</string>
+    <string name="evening_9_to_11">9-11pm</string>
+    <string name="number_of_persons">Number of persons</string>
+    <string name="num_of_persons_1_2">1-2</string>
+    <string name="num_of_persons_2_4">2-4</string>
+    <string name="num_of_persons_4_8">4-8</string>
+    <string name="num_of_persons_8_16">8-16</string>
+    <string name="book_now">Book now</string>
 </resources>
