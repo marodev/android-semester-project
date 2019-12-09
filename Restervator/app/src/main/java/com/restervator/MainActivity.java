@@ -1,5 +1,6 @@
 package com.restervator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -12,6 +13,9 @@ import com.restervator.model.RestaurantCollection;
 import com.restervator.model.SearchResponse;
 
 import java.util.Optional;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements ApiResponseListener {
 
@@ -47,5 +51,10 @@ public class MainActivity extends AppCompatActivity implements ApiResponseListen
             Log.d(LOG_TAG, firstRestaurant.getUserRating().getAverageRating());
             // ...
         }
+    }
+
+    public void nextActivity(View view) {
+        Intent intent = new Intent(this, RestaurantActivity.class);
+        startActivity(intent);
     }
 }

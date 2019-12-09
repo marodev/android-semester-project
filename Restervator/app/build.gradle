@@ -26,6 +26,9 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+    lintOptions {
+        warning 'InvalidPackage'
+    }
 }
 
 dependencies {
@@ -41,4 +44,16 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'com.android.support:appcompat-v7:29.0.0-alpha1'
+    implementation 'com.android.support:design:29.0.0-alpha1'
+    implementation 'com.google.android.material:material:1.2.0-alpha02'
+
+    // osmdroid maps dependencies
+    implementation 'org.osmdroid:osmdroid-android:6.1.4'
+    implementation 'org.osmdroid:osmdroid-wms:6.1.4'
+    implementation 'org.osmdroid:osmdroid-mapsforge:6.1.4'
+    implementation 'org.osmdroid:osmdroid-geopackage:6.1.4'
+
 }
