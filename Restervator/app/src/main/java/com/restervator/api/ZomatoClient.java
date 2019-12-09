@@ -39,7 +39,7 @@ public class ZomatoClient {
 //                    }
 //                }
 
-                if(listener != null) {
+                if (listener != null) {
                     listener.onSearchResponse(searchResponse);
                 }
 
