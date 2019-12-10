@@ -28,23 +28,17 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">
             @android:style/TextAppearance.Large</item>
-        <item name="android:background">@color/colorPrimaryLight</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <!--        <item name="android:layout_marginRight">36dp</item>-->
-        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_gravity">left</item>
         <item name="android:padding">16dp</item>
-        <item name="android:textColor">@color/colorTextPrimary</item>
-        <!--        <item name="android:contentInsetLeft"></item>-->
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:layout_marginTop">8dp</item>
     </style>
 
     <style name="list_imgage_style">
         <item name="android:layout_width">360dp</item>
         <item name="android:layout_height">360dp</item>
-        <!--        <item name="android:imageWellStyle"></item>-->
         <item name="android:background">@color/colorlistimage</item>
         <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginLeft">36dp</item>
         <item name="android:padding">16dp</item>
     </style>
 
