@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
+
 public class RestaurantActivity extends AppCompatActivity {
 
     @Override
