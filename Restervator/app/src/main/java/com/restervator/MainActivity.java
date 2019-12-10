@@ -54,4 +54,9 @@ public class MainActivity extends AppCompatActivity implements ApiResponseListen
         Intent intent = new Intent(this, RestaurantActivity.class);
         startActivity(intent);
     }
+
+    public void toMain(View view) {
+        Intent intent = new Intent(this, MainInterface.class);
+        startActivity(intent);
+    }
 }

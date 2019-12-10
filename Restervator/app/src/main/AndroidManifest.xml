@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
+        <activity android:name=".MainInterface"></activity>
         <activity
             android:name=".MapActivity"
             android:label="Map Activity"
