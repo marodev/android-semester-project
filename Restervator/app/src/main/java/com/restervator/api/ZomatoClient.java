@@ -32,12 +32,11 @@ public class ZomatoClient {
             public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
                 Log.d(LOG_TAG, "receiving response");
                 SearchResponse searchResponse = response.body();
-//                if (searchResponse != null) {
-//                    Collection<RestaurantCollection> restaurants = searchResponse.getRestaurants();
-//                    for (RestaurantCollection r : restaurants) {
-//                        Log.i(LOG_TAG, r.getRestaurant().getName());
-//                    }
-//                }
+
+                if (searchResponse == null || !response.isSuccessful()) {
+                    Log.i(LOG_TAG, "received empty response");
+                    searchResponse = new SearchResponse();
+                }
 
                 if (listener != null) {
                     listener.onSearchResponse(searchResponse);
