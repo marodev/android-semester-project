@@ -13,5 +13,4 @@
 .externalNativeBuild
 .cxx
 
-
-/.apikey.properties
+apikey.properties
