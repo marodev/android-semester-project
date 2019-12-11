@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-def apikeyPropertiesFile = rootProject.file(".apikey.properties");
+def apikeyPropertiesFile = rootProject.file(".apikey.properties")
 def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
@@ -44,10 +44,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation 'com.android.support:appcompat-v7:29.0.0-alpha1'
-    implementation 'com.android.support:design:29.0.0-alpha1'
+
+
+    // material design
     implementation 'com.google.android.material:material:1.2.0-alpha02'
 
     // osmdroid maps dependencies
