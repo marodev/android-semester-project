@@ -23,4 +23,5 @@
     <string name="book_now">Book now</string>
     <string name="maininterface">MAININTERFACE</string>
     <string name="list_image_description">the image of the restaurant</string>
+    <string name="description">rating,dictance and so on</string>
 </resources>

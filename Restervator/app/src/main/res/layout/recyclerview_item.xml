@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    >
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:id="@+id/firstimage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:color/holo_green_light"
+        />
+
 
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         />
+
+<!--    <TextView-->
+<!--        android:id="@+id/description"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="48dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:text="@string/description" />-->
+
 
 </LinearLayout>

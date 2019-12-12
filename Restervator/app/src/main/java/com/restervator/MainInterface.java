@@ -10,6 +10,8 @@ import com.restervator.model.RestaurantList;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
+
 public class MainInterface extends AppCompatActivity {
 
     ArrayList<RestaurantList> restaurants;
@@ -18,6 +20,7 @@ public class MainInterface extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_interface);
+        //ButterKnife.bind(this);
 
         RecyclerView rvRestaurants = (RecyclerView) findViewById(R.id.recyclerView);
 
