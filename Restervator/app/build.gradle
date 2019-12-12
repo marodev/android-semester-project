@@ -45,7 +45,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
 
-
     // material design
     implementation 'com.google.android.material:material:1.2.0-alpha02'
 
@@ -55,6 +54,8 @@ dependencies {
     implementation 'org.osmdroid:osmdroid-mapsforge:6.1.4'
     implementation 'org.osmdroid:osmdroid-geopackage:6.1.4'
 
+    // for geolocation
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 
     // Room components
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"

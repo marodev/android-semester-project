@@ -17,14 +17,18 @@ public class ZomatoClient {
     private ApiResponseListener listener;
 
 
-    public ZomatoClient(ApiResponseListener listener) {
-        this.listener = listener;
+    public ZomatoClient() {
         zomatoEndpoint = ApiClient.getApiClient().create(ZomatoEndpoint.class);
     }
 
-    public void search() {
+    public void search(SearchConfiguration configuration, ApiResponseListener listener) {
         Log.i(LOG_TAG, "calling search");
-        Call<SearchResponse> call = zomatoEndpoint.search(45.464211, 9.191383, "", 1, 500, "rating", "asc", "");
+
+        Call<SearchResponse> call = zomatoEndpoint.search(
+                configuration.getLatitude(), configuration.getLongitude(),
+                configuration.getSearchKeyword(), configuration.getMaxNumberOfResults(),
+                configuration.getRadiusInMeters(), configuration.getSortRestaurantsBy(),
+                configuration.getSortOrder(), configuration.getCuisineIds());
 
 
         call.enqueue(new Callback<SearchResponse>() {
