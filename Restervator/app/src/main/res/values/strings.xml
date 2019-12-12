@@ -23,11 +23,8 @@
     <string name="book_now">Book now</string>
     <string name="maininterface">MAININTERFACE</string>
     <string name="list_image_description">the image of the restaurant</string>
-<<<<<<< HEAD
     <string name="description">rating,dictance and so on</string>
-=======
     <string name="location_permission_denied">Location permissions denied,
         please enable the permissions to use this app.
     </string>
->>>>>>> 43953bdc77963d73f82e49d9e3002f86afd567bd
 </resources>
