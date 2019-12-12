@@ -20,16 +20,17 @@ public class LocationFetcher {
 
     public void getLastKnownLocation(final LocationResponseListener listener) {
 
-        // guard - check if permission is granted. otherwise abort
+        // guard - check if permission is granted. otherwise abort.
         if (!PermissionUtil.isLocationPermissionGranted(this.context)) {
             return;
         }
 
+        // register callback
         this.mFusedLocationClient.getLastLocation()
                 .addOnSuccessListener((Activity) this.context, location -> {
                     // Got last known location. In some rare situations this can be null.
                     if (location != null && listener != null) {
-                        // route the location response to a listener
+                        // route the location response to registered listener.
                         listener.onLocationResponse(location);
                     }
                 });

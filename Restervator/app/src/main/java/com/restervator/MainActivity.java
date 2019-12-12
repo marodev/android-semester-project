@@ -31,17 +31,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // setup api client
         client = new ZomatoClient();
+
+        // setup location fetcher
         locationFetcher = new LocationFetcher(this);
+
+        // prompt user to turn on location
         PermissionUtil.askUserForLocationPermission(this, REQUEST_LOCATION_PERMISSION);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // prompt user to turn on location
-
     }
 
 
@@ -62,20 +65,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * search restaurants based on the current location
-     */
-    private void searchNearByRestaurants() {
 
-        /**
-         * get last known location, add asynchronous callback
-         */
+    // search restaurants based on the current location.
+    private void searchNearByRestaurants() {
+        // get last known location, add asynchronous callback.
         locationFetcher.getLastKnownLocation(location -> {
             Log.d(LOG_TAG, "received location: " + location.toString());
 
-            /**
-             *  use the fluent builder to create a configuration for the Zomato API
-             */
+            // use the fluent builder to create a configuration for the Zomato API.
             SearchConfiguration configuration = new SearchConfiguration.Builder()
                     .nearLocation(location)
                     .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.REAL_DISTANCE)
@@ -83,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     .limitNumberOfResults(10)
                     .build();
 
-            // trigger a search, add asynchronous callback
+            // trigger a search, add asynchronous callback.
             client.search(configuration, response -> {
 
                 // example usage:
