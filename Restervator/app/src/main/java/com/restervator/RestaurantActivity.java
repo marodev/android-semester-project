@@ -2,7 +2,6 @@ package com.restervator;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,13 +23,9 @@ public class RestaurantActivity extends AppCompatActivity {
         final Intent intent = new Intent(this, Booking.class);
 
         ExtendedFloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                startActivity(intent);
-            }
-        });
+        // set onclick listener for booking activity
+        fab.setOnClickListener(view -> startActivity(intent));
 
         ImageView restaurantImageView = findViewById(R.id.imageView);
 
