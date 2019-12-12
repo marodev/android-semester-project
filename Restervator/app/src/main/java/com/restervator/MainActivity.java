@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.restervator.api.ApiResponseListener;
+import com.restervator.api.SearchConfiguration;
 import com.restervator.api.ZomatoClient;
 import com.restervator.location.LocationFetcher;
 import com.restervator.model.Restaurant;
@@ -45,7 +46,15 @@ public class MainActivity extends AppCompatActivity implements ApiResponseListen
 
         locationFetcher.getLastKnownLocation(location -> {
             Log.d(LOG_TAG, "received location: " + location.toString());
-            client.search(location.getLatitude(), location.getLongitude());
+
+            SearchConfiguration configuration = new SearchConfiguration.Builder()
+                    .nearLocation(location)
+                    .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.REAL_DISTANCE)
+                    .withSortOrder(SearchConfiguration.SortOrder.ASC)
+                    .limitNumberOfResults(10)
+                    .build();
+
+            client.search(configuration);
         });
 
     }
