@@ -68,20 +68,15 @@ public class MainActivity extends AppCompatActivity implements ApiResponseListen
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_LOCATION_PERMISSION:
-                // If the permission is granted, get the location,
-                // otherwise, show a Toast
 
-                if (!PermissionUtil.isLocationPermissionGranted(grantResults)) {
-                    Toast.makeText(this,
-                            R.string.location_permission_denied,
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
+        if (requestCode == REQUEST_LOCATION_PERMISSION) {
 
-
-                break;
+            // if location permission not granted, show a toast
+            if (!PermissionUtil.isLocationPermissionGranted(grantResults)) {
+                Toast.makeText(this,
+                        R.string.location_permission_denied,
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
