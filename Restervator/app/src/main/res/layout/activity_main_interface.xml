@@ -152,7 +152,7 @@
         android:layout_marginTop="230dp"
         android:spinnerMode="dropdown"
         app:layout_constraintStart_toEndOf="@+id/spinner2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
