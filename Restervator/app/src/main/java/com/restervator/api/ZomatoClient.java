@@ -22,9 +22,9 @@ public class ZomatoClient {
         zomatoEndpoint = ApiClient.getApiClient().create(ZomatoEndpoint.class);
     }
 
-    public void search() {
+    public void search(double latitude, double longitude) {
         Log.i(LOG_TAG, "calling search");
-        Call<SearchResponse> call = zomatoEndpoint.search(45.464211, 9.191383, "", 1, 500, "rating", "asc", "");
+        Call<SearchResponse> call = zomatoEndpoint.search(latitude, longitude, "", 1, null, "rating", "asc", "");
 
 
         call.enqueue(new Callback<SearchResponse>() {
