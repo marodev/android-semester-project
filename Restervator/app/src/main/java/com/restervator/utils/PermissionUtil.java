@@ -11,11 +11,10 @@ public class PermissionUtil {
 
 
     public static void askUserForLocationPermission(Context context, int permissionResult) {
-        if (!isLocationPermissionGranted(context)) {
-            ActivityCompat.requestPermissions((AppCompatActivity) context,
+
+        ActivityCompat.requestPermissions((AppCompatActivity) context,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     permissionResult);
-        }
     }
 
     public static boolean isLocationPermissionGranted(int[] grantResults) {

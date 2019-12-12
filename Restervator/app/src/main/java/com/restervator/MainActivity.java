@@ -11,18 +11,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.restervator.api.ApiResponseListener;
 import com.restervator.api.SearchConfiguration;
 import com.restervator.api.ZomatoClient;
 import com.restervator.location.LocationFetcher;
 import com.restervator.model.Restaurant;
 import com.restervator.model.RestaurantCollection;
-import com.restervator.model.SearchResponse;
 import com.restervator.utils.PermissionUtil;
 
 import java.util.Optional;
 
-public class MainActivity extends AppCompatActivity implements ApiResponseListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private ZomatoClient client;
@@ -33,46 +31,19 @@ public class MainActivity extends AppCompatActivity implements ApiResponseListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        client = new ZomatoClient(this);
+        client = new ZomatoClient();
         locationFetcher = new LocationFetcher(this);
+        PermissionUtil.askUserForLocationPermission(this, REQUEST_LOCATION_PERMISSION);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        PermissionUtil.askUserForLocationPermission(this, REQUEST_LOCATION_PERMISSION);
-
-
-        locationFetcher.getLastKnownLocation(location -> {
-            Log.d(LOG_TAG, "received location: " + location.toString());
-
-            SearchConfiguration configuration = new SearchConfiguration.Builder()
-                    .nearLocation(location)
-                    .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.REAL_DISTANCE)
-                    .withSortOrder(SearchConfiguration.SortOrder.ASC)
-                    .limitNumberOfResults(10)
-                    .build();
-
-            client.search(configuration);
-        });
+        // prompt user to turn on location
 
     }
 
-    @Override
-    public void onSearchResponse(SearchResponse response) {
-
-        // example usage:
-        Optional<RestaurantCollection> firstResult = response.getRestaurants().stream().findFirst();
-
-        if (firstResult.isPresent()) {
-            Restaurant firstRestaurant = firstResult.get().getRestaurant();
-            Log.d(LOG_TAG, firstRestaurant.getName());
-            Log.d(LOG_TAG, firstRestaurant.getLocation().getFullAddress());
-            Log.d(LOG_TAG, firstRestaurant.getUserRating().getAverageRating());
-            // ...
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -86,7 +57,47 @@ public class MainActivity extends AppCompatActivity implements ApiResponseListen
                         R.string.location_permission_denied,
                         Toast.LENGTH_SHORT).show();
             }
+
+            searchNearByRestaurants();
         }
+    }
+
+    /**
+     * search restaurants based on the current location
+     */
+    private void searchNearByRestaurants() {
+
+        /**
+         * get last known location, add asynchronous callback
+         */
+        locationFetcher.getLastKnownLocation(location -> {
+            Log.d(LOG_TAG, "received location: " + location.toString());
+
+            /**
+             *  use the fluent builder to create a configuration for the Zomato API
+             */
+            SearchConfiguration configuration = new SearchConfiguration.Builder()
+                    .nearLocation(location)
+                    .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.REAL_DISTANCE)
+                    .withSortOrder(SearchConfiguration.SortOrder.ASC)
+                    .limitNumberOfResults(10)
+                    .build();
+
+            // trigger a search, add asynchronous callback
+            client.search(configuration, response -> {
+
+                // example usage:
+                Optional<RestaurantCollection> firstResult = response.getRestaurants().stream().findFirst();
+
+                if (firstResult.isPresent()) {
+                    Restaurant firstRestaurant = firstResult.get().getRestaurant();
+                    Log.d(LOG_TAG, firstRestaurant.getName());
+                    Log.d(LOG_TAG, firstRestaurant.getLocation().getFullAddress());
+                    Log.d(LOG_TAG, firstRestaurant.getUserRating().getAverageRating());
+                    // ...
+                }
+            });
+        });
     }
 
     public void nextActivity(View view) {

@@ -17,13 +17,11 @@ public class ZomatoClient {
     private ApiResponseListener listener;
 
 
-    public ZomatoClient(ApiResponseListener listener) {
-        this.listener = listener;
+    public ZomatoClient() {
         zomatoEndpoint = ApiClient.getApiClient().create(ZomatoEndpoint.class);
     }
 
-    public void search(SearchConfiguration configuration) {
-
+    public void search(SearchConfiguration configuration, ApiResponseListener listener) {
         Log.i(LOG_TAG, "calling search");
 
         Call<SearchResponse> call = zomatoEndpoint.search(
