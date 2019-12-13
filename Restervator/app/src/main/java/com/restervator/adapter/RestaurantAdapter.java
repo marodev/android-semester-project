@@ -1,4 +1,4 @@
-package com.restervator;
+package com.restervator.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.restervator.R;
+import com.restervator.RestaurantActivity;
 import com.restervator.model.domain.Restaurant;
 
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -43,13 +45,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private Context context;
 
 
-    public ListAdapter(Context context, ArrayList<Restaurant> restaurants) {
+    public RestaurantAdapter(Context context, ArrayList<Restaurant> restaurants) {
         this.context = context;
         this.mRestaurants = restaurants;
     }
 
     @Override
-    public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public RestaurantAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
 
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -60,7 +62,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ListAdapter.ViewHolder viewHolder,int position){
+    public void onBindViewHolder(RestaurantAdapter.ViewHolder viewHolder, int position) {
         Restaurant restaurant = mRestaurants.get(position);
 
         TextView textView = viewHolder.nameTextView;

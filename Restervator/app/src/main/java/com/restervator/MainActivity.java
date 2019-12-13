@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.restervator.adapter.RestaurantAdapter;
 import com.restervator.api.SearchConfiguration;
 import com.restervator.api.ZomatoClient;
 import com.restervator.location.LocationFetcher;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ZomatoClient client;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private LocationFetcher locationFetcher;
-    private ListAdapter adapter;
+    private RestaurantAdapter adapter;
     private ArrayList<Restaurant> restaurants;
     private RecyclerView rvRestaurants;
 
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         // add empty data to the adapter
         restaurants = new ArrayList<>();
-        adapter = new ListAdapter(MainActivity.this, restaurants);
+        adapter = new RestaurantAdapter(MainActivity.this, restaurants);
 
         // Attach the adapter to the recyclerview to populate items
         rvRestaurants.setAdapter(adapter);
