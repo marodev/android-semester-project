@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
 
 public class RestaurantDtoToRestaurantConverter {
 
-    public static Restaurant convertToRestaurant(RestaurantDto dto) {
+    // convert a single restaurant from the api to our domain model
+    private static Restaurant convertToRestaurant(RestaurantDto dto) {
         return new Restaurant(dto.getName(),
                 dto.getLocation().getFullAddress(),
                 Double.valueOf(dto.getUserRatingDto().getAverageRating()),
