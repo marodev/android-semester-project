@@ -1,8 +1,8 @@
-package com.restervator.model;
+package com.restervator.model.dataTransferObjects;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Photo {
+public class PhotoDto {
 
     @SerializedName("thumb_url")
     private String thumbnailUrl;

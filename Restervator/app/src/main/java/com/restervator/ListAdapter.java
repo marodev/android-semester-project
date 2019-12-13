@@ -2,8 +2,6 @@ package com.restervator;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +11,12 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.restervator.model.RestaurantList;
+import com.restervator.model.domain.Restaurant;
 
 import java.util.ArrayList;
 
-import butterknife.BindAnim;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnItemClick;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
@@ -42,15 +38,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         }
     }
 
-    private ArrayList<RestaurantList> mRestaurants;
+    private ArrayList<Restaurant> mRestaurants;
     private AdapterView.OnItemClickListener onItemClickListener;
     private Context context;
 
 
-
-    public ListAdapter(Context context, ArrayList<RestaurantList> Restaurants){
+    public ListAdapter(Context context, ArrayList<Restaurant> restaurants) {
         this.context = context;
-        this.mRestaurants = Restaurants;
+        this.mRestaurants = restaurants;
     }
 
     @Override
@@ -61,23 +56,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         View RestaurantView = inflater.inflate(R.layout.recyclerview_item, parent,false);
 
-        ViewHolder viewHolder = new ViewHolder(RestaurantView);
-        return viewHolder;
+        return new ViewHolder(RestaurantView);
     }
 
     @Override
     public void onBindViewHolder(ListAdapter.ViewHolder viewHolder,int position){
-        RestaurantList restaurant = mRestaurants.get(position);
+        Restaurant restaurant = mRestaurants.get(position);
 
         TextView textView = viewHolder.nameTextView;
         textView.setText(restaurant.getName());
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, RestaurantActivity.class);
-                context.startActivity(intent);
-            }
+        viewHolder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, RestaurantActivity.class);
+            context.startActivity(intent);
         });
 
     }

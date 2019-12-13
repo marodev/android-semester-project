@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.restervator.api.core.ApiClient;
 import com.restervator.api.core.ZomatoEndpoint;
-import com.restervator.model.SearchResponse;
+import com.restervator.model.dataTransferObjects.SearchResponseDto;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,22 +24,22 @@ public class ZomatoClient {
     public void search(SearchConfiguration configuration, ApiResponseListener listener) {
         Log.i(LOG_TAG, "calling search");
 
-        Call<SearchResponse> call = zomatoEndpoint.search(
+        Call<SearchResponseDto> call = zomatoEndpoint.search(
                 configuration.getLatitude(), configuration.getLongitude(),
                 configuration.getSearchKeyword(), configuration.getMaxNumberOfResults(),
                 configuration.getRadiusInMeters(), configuration.getSortRestaurantsBy(),
                 configuration.getSortOrder(), configuration.getCuisineIds());
 
 
-        call.enqueue(new Callback<SearchResponse>() {
+        call.enqueue(new Callback<SearchResponseDto>() {
             @Override
-            public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
+            public void onResponse(Call<SearchResponseDto> call, Response<SearchResponseDto> response) {
                 Log.d(LOG_TAG, "receiving response");
-                SearchResponse searchResponse = response.body();
+                SearchResponseDto searchResponse = response.body();
 
                 if (searchResponse == null || !response.isSuccessful()) {
                     Log.i(LOG_TAG, "received empty response");
-                    searchResponse = new SearchResponse();
+                    searchResponse = new SearchResponseDto();
                 }
 
                 if (listener != null) {
@@ -49,7 +49,7 @@ public class ZomatoClient {
             }
 
             @Override
-            public void onFailure(Call<SearchResponse> call, Throwable t) {
+            public void onFailure(Call<SearchResponseDto> call, Throwable t) {
                 Log.e(LOG_TAG, "something went wrong: " + t.getMessage());
             }
         });

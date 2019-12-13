@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,13 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.restervator.api.SearchConfiguration;
 import com.restervator.api.ZomatoClient;
 import com.restervator.location.LocationFetcher;
-import com.restervator.model.Restaurant;
-import com.restervator.model.RestaurantCollection;
-import com.restervator.model.RestaurantList;
+import com.restervator.model.dataTransferObjects.SearchResponseDto;
+import com.restervator.model.domain.Restaurant;
 import com.restervator.utils.PermissionUtil;
 
 import java.util.ArrayList;
-import java.util.Optional;
+
+import static com.restervator.converter.RestaurantDtoToRestaurantConverter.convertToRestaurantList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private ZomatoClient client;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private LocationFetcher locationFetcher;
-    ArrayList<RestaurantList> restaurants;
+    private ListAdapter adapter;
+    private ArrayList<Restaurant> restaurants;
+    private RecyclerView rvRestaurants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +47,15 @@ public class MainActivity extends AppCompatActivity {
         // prompt user to turn on location
         PermissionUtil.askUserForLocationPermission(this, REQUEST_LOCATION_PERMISSION);
 
-        RecyclerView rvRestaurants = (RecyclerView) findViewById(R.id.recyclerView);
+        rvRestaurants = findViewById(R.id.recyclerView);
 
-        restaurants = RestaurantList.createRestaurantList(10);
+        // add empty data to the adapter
+        restaurants = new ArrayList<>();
+        adapter = new ListAdapter(MainActivity.this, restaurants);
 
-        ListAdapter adapter = new ListAdapter(MainActivity.this,restaurants);
         // Attach the adapter to the recyclerview to populate items
         rvRestaurants.setAdapter(adapter);
+
         // Set layout manager to position the items
         rvRestaurants.setLayoutManager(new LinearLayoutManager(this));
 
@@ -97,23 +100,16 @@ public class MainActivity extends AppCompatActivity {
                     .build();
 
             // trigger a search, add asynchronous callback.
-            client.search(configuration, response -> {
-
-                // example usage:
-                Optional<RestaurantCollection> firstResult = response.getRestaurants().stream().findFirst();
-
-                if (firstResult.isPresent()) {
-                    Restaurant firstRestaurant = firstResult.get().getRestaurant();
-                    Log.d(LOG_TAG, firstRestaurant.getName());
-                    Log.d(LOG_TAG, firstRestaurant.getLocation().getFullAddress());
-                    Log.d(LOG_TAG, firstRestaurant.getUserRating().getAverageRating());
-                    // ...
-                }
-            });
+            client.search(configuration, this::displayData);
         });
     }
 
-
+    // converte remote data and display the data to the user interface
+    private void displayData(SearchResponseDto dto) {
+        this.restaurants.clear();
+        this.restaurants.addAll(new ArrayList<>(convertToRestaurantList(dto)));
+        adapter.notifyDataSetChanged();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

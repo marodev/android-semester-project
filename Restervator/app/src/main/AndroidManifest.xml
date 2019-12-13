@@ -27,7 +27,6 @@
 
 
         <activity android:name=".ReservationOverviewActivity"></activity>
-        <activity android:name=".MainInterface" />
         <activity
             android:name=".MapActivity"
             android:label="Map Activity"
