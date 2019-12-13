@@ -10,14 +10,18 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.restervator.api.SearchConfiguration;
 import com.restervator.api.ZomatoClient;
 import com.restervator.location.LocationFetcher;
 import com.restervator.model.Restaurant;
 import com.restervator.model.RestaurantCollection;
+import com.restervator.model.RestaurantList;
 import com.restervator.utils.PermissionUtil;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ZomatoClient client;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private LocationFetcher locationFetcher;
+    ArrayList<RestaurantList> restaurants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,17 @@ public class MainActivity extends AppCompatActivity {
 
         // prompt user to turn on location
         PermissionUtil.askUserForLocationPermission(this, REQUEST_LOCATION_PERMISSION);
+
+        RecyclerView rvRestaurants = (RecyclerView) findViewById(R.id.recyclerView);
+
+        restaurants = RestaurantList.createRestaurantList(10);
+
+        ListAdapter adapter = new ListAdapter(MainActivity.this,restaurants);
+        // Attach the adapter to the recyclerview to populate items
+        rvRestaurants.setAdapter(adapter);
+        // Set layout manager to position the items
+        rvRestaurants.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     @Override
@@ -97,15 +113,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void nextActivity(View view) {
-        Intent intent = new Intent(this, RestaurantActivity.class);
-        startActivity(intent);
-    }
 
-    public void toMain(View view) {
-        Intent intent = new Intent(this, MainInterface.class);
-        startActivity(intent);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,10 +1,13 @@
 package com.restervator;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 import butterknife.BindAnim;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
@@ -39,9 +43,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     private ArrayList<RestaurantList> mRestaurants;
+    private AdapterView.OnItemClickListener onItemClickListener;
+    private Context context;
 
-    public ListAdapter(ArrayList<RestaurantList> Restaurants){
-        mRestaurants = Restaurants;
+
+
+    public ListAdapter(Context context, ArrayList<RestaurantList> Restaurants){
+        this.context = context;
+        this.mRestaurants = Restaurants;
     }
 
     @Override
@@ -63,11 +72,29 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         TextView textView = viewHolder.nameTextView;
         textView.setText(restaurant.getName());
 
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, RestaurantActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return mRestaurants.size();
     }
+
+    public interface OnItemClickListener{
+        void onItemClickListener(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = (AdapterView.OnItemClickListener) onItemClickListener;
+    }
+
+
 }
 

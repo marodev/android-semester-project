@@ -26,7 +26,7 @@ public class MainInterface extends AppCompatActivity {
 
         restaurants = RestaurantList.createRestaurantList(10);
 
-        ListAdapter adapter = new ListAdapter(restaurants);
+        ListAdapter adapter = new ListAdapter(MainInterface.this,restaurants);
         // Attach the adapter to the recyclerview to populate items
         rvRestaurants.setAdapter(adapter);
         // Set layout manager to position the items

@@ -27,4 +27,5 @@
     <string name="location_permission_denied">Location permissions denied,
         please enable the permissions to use this app.
     </string>
+    <string name="List_image">firstimage</string>
 </resources>
