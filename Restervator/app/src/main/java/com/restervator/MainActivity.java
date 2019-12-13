@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // converte remote data and display the data to the user interface
+    // convert remote data and display the data to the user interface
     private void displayData(SearchResponseDto dto) {
         this.restaurants.clear();
         this.restaurants.addAll(new ArrayList<>(convertToRestaurantList(dto)));
