@@ -108,8 +108,13 @@ public class MainActivity extends AppCompatActivity {
 
     // convert remote data and display the data to the user interface
     private void displayData(SearchResponseDto dto) {
+        // empty the adapter
         this.restaurants.clear();
+
+        // convert the api data to our domain model and add it to the adapter
         this.restaurants.addAll(new ArrayList<>(convertToRestaurantList(dto)));
+
+        // notify the adapter that the data has changed
         adapter.notifyDataSetChanged();
     }
 
