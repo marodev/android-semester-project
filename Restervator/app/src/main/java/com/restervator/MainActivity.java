@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions, @NonNull int[] grantResults) {
 
+        // check if the response is from the call to allow fetching the location
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
 
             // if location permission not granted, show a toast
