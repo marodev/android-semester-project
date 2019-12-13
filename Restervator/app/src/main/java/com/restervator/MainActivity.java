@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
 
+            // get last known position and fetch the data from the API
             searchNearByRestaurants();
         }
     }
