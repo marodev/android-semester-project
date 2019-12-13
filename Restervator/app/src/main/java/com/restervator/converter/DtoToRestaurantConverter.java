@@ -7,7 +7,7 @@ import com.restervator.model.domain.Restaurant;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RestaurantDtoToRestaurantConverter {
+public class DtoToRestaurantConverter {
 
     // convert a single restaurant from the api to our domain model
     private static Restaurant convertToRestaurant(RestaurantDto dto) {

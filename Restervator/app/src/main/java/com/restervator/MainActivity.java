@@ -21,7 +21,7 @@ import com.restervator.utils.PermissionUtil;
 
 import java.util.ArrayList;
 
-import static com.restervator.converter.RestaurantDtoToRestaurantConverter.convertToRestaurantList;
+import static com.restervator.converter.DtoToRestaurantConverter.convertToRestaurantList;
 
 public class MainActivity extends AppCompatActivity {
 
