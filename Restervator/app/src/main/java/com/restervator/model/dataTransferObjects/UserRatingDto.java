@@ -1,8 +1,8 @@
-package com.restervator.model;
+package com.restervator.model.dataTransferObjects;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UserRating {
+public class UserRatingDto {
 
     @SerializedName("aggregate_rating")
     private String averageRating;

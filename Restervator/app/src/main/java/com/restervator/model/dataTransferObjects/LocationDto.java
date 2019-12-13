@@ -1,8 +1,8 @@
-package com.restervator.model;
+package com.restervator.model.dataTransferObjects;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Location {
+public class LocationDto {
     @SerializedName("address")
     private String fullAddress;
 

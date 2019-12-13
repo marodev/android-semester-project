@@ -1,16 +1,16 @@
-package com.restervator.model;
+package com.restervator.model.dataTransferObjects;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Collection;
 
-public class Restaurant {
+public class RestaurantDto {
 
     @SerializedName("name")
     private String name;
 
     @SerializedName("location")
-    private Location location;
+    private LocationDto location;
 
     @SerializedName("cuisines")
     private String cuisines;
@@ -31,10 +31,10 @@ public class Restaurant {
     private String thumbnailUrl;
 
     @SerializedName("user_rating")
-    private UserRating userRating;
+    private UserRatingDto userRatingDto;
 
     @SerializedName("photos")
-    private Collection<PhotoCollection> photos;
+    private Collection<PhotoCollectionDto> photos;
 
     @SerializedName("phone_numbers")
     private String phoneNumber;
@@ -57,11 +57,11 @@ public class Restaurant {
         this.name = name;
     }
 
-    public Location getLocation() {
+    public LocationDto getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(LocationDto location) {
         this.location = location;
     }
 
@@ -113,19 +113,19 @@ public class Restaurant {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public UserRating getUserRating() {
-        return userRating;
+    public UserRatingDto getUserRatingDto() {
+        return userRatingDto;
     }
 
-    public void setUserRating(UserRating userRating) {
-        this.userRating = userRating;
+    public void setUserRatingDto(UserRatingDto userRatingDto) {
+        this.userRatingDto = userRatingDto;
     }
 
-    public Collection<PhotoCollection> getPhotos() {
+    public Collection<PhotoCollectionDto> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(Collection<PhotoCollection> photos) {
+    public void setPhotos(Collection<PhotoCollectionDto> photos) {
         this.photos = photos;
     }
 
@@ -138,8 +138,8 @@ public class Restaurant {
     }
 
 
-//    public Restaurant() {
+//    public RestaurantDto() {
 //        this.photos = new ArrayList<>();
-//        this.location = new Location();
+//        this.location = new LocationDto();
 //    }
 }

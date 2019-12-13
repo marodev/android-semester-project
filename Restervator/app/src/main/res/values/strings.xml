@@ -2,9 +2,9 @@
     <string name="app_name">Restervator</string>
     <string name="title_activity_restaurant">RestaurantActivity</string>
     <string name="book_a_table"> Book a table </string>
-    <string name="restaurant">Restaurant</string>
+    <string name="restaurantDto">Restaurant</string>
     <string name="extended_fab_content_desc">When this button is clicked, it is supposed to go to the activity where you book a table </string>
-    <string name="full_image_of_a_restaurant">Full image of a restaurant</string>
+    <string name="full_image_of_a_restaurant">Full image of a restaurantDto</string>
     <string name="restaurant_name">Ristorante Cantinone</string>
     <string name="restaurant_address">Via Zurigo 3, 6900 Lugano</string>
     <string name="restaurant_city">Milan</string>
@@ -22,7 +22,7 @@
     <string name="num_of_persons_8_16">8-16</string>
     <string name="book_now">Book now</string>
     <string name="maininterface">MAININTERFACE</string>
-    <string name="list_image_description">the image of the restaurant</string>
+    <string name="list_image_description">the image of the restaurantDto</string>
     <string name="description">rating,dictance and so on</string>
     <string name="location_permission_denied">Location permissions denied,
         please enable the permissions to use this app.
