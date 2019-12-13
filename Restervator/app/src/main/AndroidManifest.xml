@@ -30,14 +30,14 @@
         <activity
             android:name=".MapActivity"
             android:label="Map Activity"
-            android:parentActivityName=".Booking"
+            android:parentActivityName=".BookingActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.restervator.RestaurantActivity" />
         </activity>
         <activity
-            android:name=".Booking"
+            android:name=".BookingActivity"
             android:label="Booking Activity"
             android:parentActivityName=".RestaurantActivity"
             android:theme="@style/AppTheme.NoActionBar">

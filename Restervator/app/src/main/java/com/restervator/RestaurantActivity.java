@@ -20,7 +20,7 @@ public class RestaurantActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final Intent intent = new Intent(this, Booking.class);
+        final Intent intent = new Intent(this, BookingActivity.class);
 
         ExtendedFloatingActionButton fab = findViewById(R.id.fab);
 
