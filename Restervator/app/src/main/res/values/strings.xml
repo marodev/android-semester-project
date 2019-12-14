@@ -11,25 +11,31 @@
     <string name="restaurant_phone">0774293749</string>
     <string name="date">Select date</string>
     <string name="time">Select time</string>
-    <string name="evening_3_to_5">3-5pm</string>
-    <string name="evening_5_to_7">5-7pm</string>
-    <string name="evening_7_to_9">7-9pm</string>
-    <string name="evening_9_to_11">9-11pm</string>
+
+    <string name="evening_4_to_6">4-6pm</string>
+    <string name="evening_6_to_8">6-8pm</string>
+    <string name="evening_8_to_10">8-10pm</string>
+    <string name="evening_10_above">10pm + </string>
+
+    <string name="noon_2_4">2-4pm</string>
+    <string name="noon_12_2">12-2pm</string>
+    <string name="early_10_12">10-12</string>
+    <string name="early_8_10">8-10am</string>
+
     <string name="number_of_persons">Number of persons</string>
     <string name="num_of_persons_1_2">1-2</string>
-    <string name="num_of_persons_2_4">2-4</string>
-    <string name="num_of_persons_4_8">4-8</string>
-    <string name="num_of_persons_8_16">8-16</string>
+    <string name="num_of_persons_3_4">3-4</string>
+    <string name="num_of_persons_5_8">5-8</string>
+    <string name="num_of_persons_9_above">9+</string>
+
     <string name="book_now">Book now</string>
     <string name="maininterface">MAININTERFACE</string>
     <string name="list_image_description">the image of the restaurantDto</string>
-    <string name="description">rating,dictance and so on</string>
+    <string name="description">rating, distance and so on</string>
     <string name="location_permission_denied">Location permissions denied,
         please enable the permissions to use this app.
     </string>
     <string name="List_image">firstimage</string>
     <string name="more_information">More information</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
