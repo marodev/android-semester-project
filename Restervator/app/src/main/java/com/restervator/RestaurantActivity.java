@@ -25,6 +25,8 @@ import static com.restervator.adapter.RestaurantAdapter.EXTRA_REPLY;
 
 public class RestaurantActivity extends AppCompatActivity {
 
+    public static final String RESTAURANT_REPLY =
+            "com.restervator.extra.REPLY";
 
     MapView map = null;
     private MyLocationNewOverlay mLocationOverlay;
@@ -85,6 +87,7 @@ public class RestaurantActivity extends AppCompatActivity {
         ExtendedFloatingActionButton fab = findViewById(R.id.fab);
 
         final Intent intent = new Intent(this, BookingActivity.class);
+        intent.putExtra(RESTAURANT_REPLY, restaurantName);
         // set onclick listener for booking activity
         fab.setOnClickListener(view -> startActivity(intent));
 
