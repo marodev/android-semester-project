@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/early_8_10"
+        android:text="@string/noon_12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -69,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/early_10_12"
+        android:text="@string/noon_13"
         app:layout_constraintBaseline_toBaselineOf="@id/button2"
         app:layout_constraintLeft_toRightOf="@id/button2" />
 
@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/noon_12_2"
+        android:text="@string/noon_14"
         app:layout_constraintBaseline_toBaselineOf="@id/button3"
         app:layout_constraintLeft_toRightOf="@id/button3" />
 
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/noon_2_4"
+        android:text="@string/noon_15"
         app:layout_constraintBaseline_toBaselineOf="@id/button4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toRightOf="@id/button4" />
@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/evening_4_to_6"
+        android:text="@string/evening_18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 
@@ -108,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/evening_6_to_8"
+        android:text="@string/evening_19"
         app:layout_constraintBaseline_toBaselineOf="@id/button11"
         app:layout_constraintLeft_toRightOf="@id/button11" />
 
@@ -117,7 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/evening_8_to_10"
+        android:text="@string/evening_20"
         app:layout_constraintBaseline_toBaselineOf="@id/button12"
         app:layout_constraintLeft_toRightOf="@id/button12" />
 
@@ -127,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/evening_10_above"
+        android:text="@string/evening_21"
         app:layout_constraintBaseline_toBaselineOf="@id/button13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toRightOf="@id/button13" />

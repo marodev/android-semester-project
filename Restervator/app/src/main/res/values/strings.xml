@@ -12,15 +12,15 @@
     <string name="date">Select date</string>
     <string name="time">Select time</string>
 
-    <string name="evening_4_to_6">4-6pm</string>
-    <string name="evening_6_to_8">6-8pm</string>
-    <string name="evening_8_to_10">8-10pm</string>
-    <string name="evening_10_above">10pm + </string>
+    <string name="noon_12">12h00</string>
+    <string name="noon_13">13h00</string>
+    <string name="noon_14">14h00</string>
+    <string name="noon_15">15h00</string>
 
-    <string name="noon_2_4">2-4pm</string>
-    <string name="noon_12_2">12-2pm</string>
-    <string name="early_10_12">10-12</string>
-    <string name="early_8_10">8-10am</string>
+    <string name="evening_18">18h00</string>
+    <string name="evening_19">19h00</string>
+    <string name="evening_20">20h00</string>
+    <string name="evening_21">21h00 + </string>
 
     <string name="number_of_persons">Number of persons</string>
     <string name="num_of_persons_1_2">1-2</string>
