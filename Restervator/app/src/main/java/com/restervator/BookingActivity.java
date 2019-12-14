@@ -15,7 +15,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     public void openMap(View view) {
-        Intent intent = new Intent(this, MapActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, MapActivity.class);
+//        startActivity(intent);
     }
 }
