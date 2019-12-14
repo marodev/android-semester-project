@@ -16,6 +16,7 @@ import com.restervator.RestaurantActivity;
 import com.restervator.model.domain.Restaurant;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,26 +24,7 @@ import butterknife.ButterKnife;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
 
-    public static final String EXTRA_REPLY =
-            "com.restervator.adapter.extra.REPLY";
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        @BindView(R.id.firstimage)
-        ImageView firstImage;
-        @BindView(R.id.name)
-        TextView nameTextView;
-//        @BindView(R.id.description)
-//        TextView descriptionTextView;
-
-
-        public ViewHolder(View itemView) {
-
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-
-        }
-    }
+    public static final String EXTRA_REPLY = "com.restervator.adapter.extra.REPLY";;
 
     private ArrayList<Restaurant> mRestaurants;
     private AdapterView.OnItemClickListener onItemClickListener;
@@ -72,9 +54,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         TextView textView = viewHolder.nameTextView;
         textView.setText(restaurant.getName());
 
+        ArrayList<String> intentMessage = new ArrayList<>();
+        intentMessage.add(restaurant.getName());
+        intentMessage.add(restaurant.getFullAddress());
+        intentMessage.add(restaurant.getPhoneNumber());
+
         viewHolder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, RestaurantActivity.class);
-            intent.putExtra(EXTRA_REPLY, restaurant.getName());
+            intent.putStringArrayListExtra(EXTRA_REPLY, intentMessage);
             context.startActivity(intent);
         });
 
@@ -93,6 +80,23 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         this.onItemClickListener = (AdapterView.OnItemClickListener) onItemClickListener;
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder{
+
+        @BindView(R.id.firstimage)
+        ImageView firstImage;
+        @BindView(R.id.name)
+        TextView nameTextView;
+//        @BindView(R.id.description)
+//        TextView descriptionTextView;
+
+
+        public ViewHolder(View itemView) {
+
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+
+        }
+    }
 
 }
 

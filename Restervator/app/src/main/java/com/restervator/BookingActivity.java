@@ -23,6 +23,12 @@ public class BookingActivity extends AppCompatActivity {
         restaurantNameView.setText(restaurantName);
     }
 
+    //handle the date chosen in calendar
+    //handle time
+    //handle num of persons
+    //save info in database
+    //display the information in ReservationOverviewActivity
+    //add swipe to delete
 
     public void bookRestaurant(View view) {
         Toast.makeText(this, restaurantName + " has been reserved",

@@ -20,6 +20,8 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
+import java.util.ArrayList;
+
 import static com.restervator.adapter.RestaurantAdapter.EXTRA_REPLY;
 
 
@@ -67,10 +69,16 @@ public class RestaurantActivity extends AppCompatActivity {
 
         /*******************Fetching restaurant image, name, and Fab controls ***************/
 
-        String restaurantName = getIntent().getExtras().getString(EXTRA_REPLY);
+        ArrayList<String> restaurantInfo = getIntent().getStringArrayListExtra(EXTRA_REPLY);
 
         TextView restaurantNameView = findViewById(R.id.restaurantName);
-        restaurantNameView.setText(restaurantName);
+        restaurantNameView.setText(restaurantInfo.get(0));
+
+        TextView restaurantAddressView = findViewById(R.id.restaurantAddress);
+        restaurantAddressView.setText(restaurantInfo.get(1));
+
+        TextView restaurantNumberView = findViewById(R.id.restaurantNumber);
+        restaurantNumberView.setText(restaurantInfo.get(2));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -87,7 +95,7 @@ public class RestaurantActivity extends AppCompatActivity {
         ExtendedFloatingActionButton fab = findViewById(R.id.fab);
 
         final Intent intent = new Intent(this, BookingActivity.class);
-        intent.putExtra(RESTAURANT_REPLY, restaurantName);
+        intent.putExtra(RESTAURANT_REPLY, restaurantInfo.get(0));
         // set onclick listener for booking activity
         fab.setOnClickListener(view -> startActivity(intent));
 
