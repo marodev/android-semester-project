@@ -20,7 +20,11 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
+
+    public static final String EXTRA_REPLY =
+            "com.restervator.adapter.extra.REPLY";
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -70,6 +74,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         viewHolder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, RestaurantActivity.class);
+            intent.putExtra(EXTRA_REPLY, restaurant.getName());
             context.startActivity(intent);
         });
 
