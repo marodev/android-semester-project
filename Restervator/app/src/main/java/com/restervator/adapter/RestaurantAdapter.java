@@ -19,29 +19,29 @@ import com.restervator.model.domain.Restaurant;
 import org.mapsforge.map.layer.overlay.Grid;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+//<<<<<<< HEAD
+//public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
+//
+//    public class ViewHolder extends RecyclerView.ViewHolder{
+//
+//        @BindView(R.id.firstimage)
+//        ImageView firstImage;
+//        @BindView(R.id.name)
+//        TextView nameTextView;
+//        @BindView(R.id.description)
+//        TextView descriptionTextView;
+//
+//=======
+//>>>>>>> a8ba6754cb030691bfcd1c8d18998c14b852f0ea
+
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
-        @BindView(R.id.firstimage)
-        ImageView firstImage;
-        @BindView(R.id.name)
-        TextView nameTextView;
-        @BindView(R.id.description)
-        TextView descriptionTextView;
-
-
-        public ViewHolder(View itemView) {
-
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-
-        }
-    }
+    public static final String EXTRA_REPLY = "com.restervator.adapter.extra.REPLY";;
 
     private ArrayList<Restaurant> mRestaurants;
     private AdapterView.OnItemClickListener onItemClickListener;
@@ -78,9 +78,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         TextView descriptionTextView = viewHolder.descriptionTextView;
         descriptionTextView.setText(restaurant.getFullAddress());
 
+        ArrayList<String> intentMessage = new ArrayList<>();
+        intentMessage.add(restaurant.getName());
+        intentMessage.add(restaurant.getFullAddress());
+        intentMessage.add(restaurant.getPhoneNumber());
 
         viewHolder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, RestaurantActivity.class);
+            intent.putStringArrayListExtra(EXTRA_REPLY, intentMessage);
             context.startActivity(intent);
         });
 
@@ -99,6 +104,23 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         this.onItemClickListener = (AdapterView.OnItemClickListener) onItemClickListener;
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder{
+
+        @BindView(R.id.firstimage)
+        ImageView firstImage;
+        @BindView(R.id.name)
+        TextView nameTextView;
+        @BindView(R.id.description)
+        TextView descriptionTextView;
+
+
+        public ViewHolder(View itemView) {
+
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+
+        }
+    }
 
 }
 
