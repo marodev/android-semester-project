@@ -28,15 +28,6 @@
 
         <activity android:name=".ReservationOverviewActivity"></activity>
         <activity
-            android:name=".MapActivity"
-            android:label="Map Activity"
-            android:parentActivityName=".BookingActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.restervator.RestaurantActivity" />
-        </activity>
-        <activity
             android:name=".BookingActivity"
             android:label="Booking Activity"
             android:parentActivityName=".RestaurantActivity"

@@ -11,21 +11,31 @@
     <string name="restaurant_phone">0774293749</string>
     <string name="date">Select date</string>
     <string name="time">Select time</string>
-    <string name="evening_3_to_5">3-5pm</string>
-    <string name="evening_5_to_7">5-7pm</string>
-    <string name="evening_7_to_9">7-9pm</string>
-    <string name="evening_9_to_11">9-11pm</string>
+
+    <string name="noon_12">12h00</string>
+    <string name="noon_13">13h00</string>
+    <string name="noon_14">14h00</string>
+    <string name="noon_15">15h00</string>
+
+    <string name="evening_18">18h00</string>
+    <string name="evening_19">19h00</string>
+    <string name="evening_20">20h00</string>
+    <string name="evening_21">21h00 + </string>
+
     <string name="number_of_persons">Number of persons</string>
     <string name="num_of_persons_1_2">1-2</string>
-    <string name="num_of_persons_2_4">2-4</string>
-    <string name="num_of_persons_4_8">4-8</string>
-    <string name="num_of_persons_8_16">8-16</string>
+    <string name="num_of_persons_3_4">3-4</string>
+    <string name="num_of_persons_5_8">5-8</string>
+    <string name="num_of_persons_9_above">9+</string>
+
     <string name="book_now">Book now</string>
     <string name="maininterface">MAININTERFACE</string>
     <string name="list_image_description">the image of the restaurantDto</string>
-    <string name="description">rating,dictance and so on</string>
+    <string name="description">rating, distance and so on</string>
     <string name="location_permission_denied">Location permissions denied,
         please enable the permissions to use this app.
     </string>
     <string name="List_image">firstimage</string>
+    <string name="more_information">More information</string>
+
 </resources>
