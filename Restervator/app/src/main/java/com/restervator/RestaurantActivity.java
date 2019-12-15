@@ -18,7 +18,9 @@ import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
+import org.osmdroid.views.overlay.ItemizedIconOverlay;
+import org.osmdroid.views.overlay.ItemizedOverlay;
+import org.osmdroid.views.overlay.OverlayItem;
 
 import java.util.ArrayList;
 
@@ -30,45 +32,27 @@ public class RestaurantActivity extends AppCompatActivity {
     public static final String RESTAURANT_REPLY =
             "com.restervator.extra.REPLY";
 
-    MapView map = null;
-    private MyLocationNewOverlay mLocationOverlay;
+    private MapView map = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant);
 
-        /*******************Loading the map ***************/
-
-        //load/initialize the osmdroid configuration for the map
+        // load/initialize the osmdroid configuration for the map from cache
+        // setting this before the layout is inflated is a good idea
+        // it 'should' ensure that the map has a writable location for the map cache, even without permissions
+        // note, the load method also sets the HTTP User Agent to your application's package name, abusing osm's tile servers will get you banned based on this string
         Context ctx = getApplicationContext();
         Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
-        //setting this before the layout is inflated is a good idea
-        //it 'should' ensure that the map has a writable location for the map cache, even without permissions
-        //note, the load method also sets the HTTP User Agent to your application's package name, abusing osm's tile servers will get you banned based on this string
-        //inflate and create the map
+        // inflate view
         setContentView(R.layout.activity_restaurant);
-        map = findViewById(R.id.map);
-        map.setTileSource(TileSourceFactory.MAPNIK);
-        map.setMultiTouchControls(true);
-        IMapController mapController = map.getController();
-        mapController.setZoom(9.5);
 
+        // create and inflate map. Zoom to restaurant and add icon
+        initializeMap();
 
-        //adds the user location on the map. This is not yet working, right now default location is set to milan below
-//        this.mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(ctx), map);
-//        this.mLocationOverlay.enableMyLocation();
-//        map.getOverlays().add(this.mLocationOverlay);
-
-        //sets the starting point on the map to the long and lat of Milan
-        GeoPoint startPoint = new GeoPoint(45.4642, 9.1900);
-        mapController.setCenter(startPoint);
-
-
-        /*******************Fetching restaurant image, name, and Fab controls ***************/
-
+        // Fetching restaurant image, name, and Fab controls
         ArrayList<String> restaurantInfo = getIntent().getStringArrayListExtra(EXTRA_REPLY);
 
         TextView restaurantNameView = findViewById(R.id.restaurantName);
@@ -83,22 +67,76 @@ public class RestaurantActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        ImageView restaurantImageView = findViewById(R.id.imageView);
-
         // http request to fetch image and load into the view
+        ImageView restaurantImageView = findViewById(R.id.imageView);
         Picasso.get()
                 .load("https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg")
                 .into(restaurantImageView);
 
-        //Fab
+        // Fab
         ExtendedFloatingActionButton fab = findViewById(R.id.fab);
 
+        // set onclick listener for booking activity and add information about the restaurant
         final Intent intent = new Intent(this, BookingActivity.class);
         intent.putExtra(RESTAURANT_REPLY, restaurantInfo.get(0));
-        // set onclick listener for booking activity
         fab.setOnClickListener(view -> startActivity(intent));
 
+    }
+
+    private void initializeMap() {
+        map = findViewById(R.id.map);
+
+        map.setTileSource(TileSourceFactory.MAPNIK);
+        // set source to load from openstreetmap (remote), note: doesn't work on an emulator
+//        map.setTileSource(
+//                new XYTileSource("HttpMapnik",
+//                        0, 19, 256, ".png", new String[]{
+//                        "http://a.tile.openstreetmap.org/",
+//                        "http://b.tile.openstreetmap.org/",
+//                        "http://c.tile.openstreetmap.org/"},
+//                        "© OpenStreetMap contributors")
+//        );
+
+        map.setMultiTouchControls(true);
+        map.setTilesScaledToDpi(true);
+
+        IMapController mapController = map.getController();
+
+        //sets the starting point on the map to the long and lat of Milan
+        GeoPoint startPoint = new GeoPoint(45.4642, 9.1900);
+        mapController.setCenter(startPoint);
+        mapController.setZoom(16.0);
+
+        // TODO: enable user location
+        //adds the user location on the map. This is not yet working, right now default location is set to milan below
+//        this.mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(ctx), map);
+//        this.mLocationOverlay.enableMyLocation();
+//        map.getOverlays().add(this.mLocationOverlay);
+
+        addRestaurantIconToMap();
+    }
+
+    private void addRestaurantIconToMap() {
+
+        // list to hold the references to the icons
+        final ArrayList<OverlayItem> items = new ArrayList<>();
+
+        // add icon for the restaurant // TODO: currently set to Milano
+        items.add(new OverlayItem("Milano", "SampleDescription", new GeoPoint(45.4642, 9.1900)));
+
+        // add icon to the map
+        ItemizedOverlay<OverlayItem> mMyLocationOverlay = new ItemizedIconOverlay<>(items, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+            @Override
+            public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
+                return true; // We 'handled' this event.
+            }
+
+            @Override
+            public boolean onItemLongPress(final int index, final OverlayItem item) {
+                return true; // We 'handled' this event.
+            }
+        }, getApplicationContext());
+        this.map.getOverlays().add(mMyLocationOverlay);
     }
 
 
