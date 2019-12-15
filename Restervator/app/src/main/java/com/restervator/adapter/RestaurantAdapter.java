@@ -71,6 +71,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         intentMessage.add(restaurant.getName());
         intentMessage.add(restaurant.getFullAddress());
         intentMessage.add(restaurant.getPhoneNumber());
+        intentMessage.add(uri.toString());
 
         viewHolder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, RestaurantActivity.class);

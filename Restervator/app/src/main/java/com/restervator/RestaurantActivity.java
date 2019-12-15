@@ -53,24 +53,27 @@ public class RestaurantActivity extends AppCompatActivity {
         initializeMap();
 
         // Fetching restaurant image, name, and Fab controls
-        ArrayList<String> restaurantInfo = getIntent().getStringArrayListExtra(EXTRA_REPLY);
+        ArrayList<String> restaurantInformation = getIntent().getStringArrayListExtra(EXTRA_REPLY);
 
         TextView restaurantNameView = findViewById(R.id.restaurantName);
-        restaurantNameView.setText(restaurantInfo.get(0));
+        restaurantNameView.setText(restaurantInformation.get(0));
 
         TextView restaurantAddressView = findViewById(R.id.restaurantAddress);
-        restaurantAddressView.setText(restaurantInfo.get(1));
+        restaurantAddressView.setText(restaurantInformation.get(1));
 
         TextView restaurantNumberView = findViewById(R.id.restaurantNumber);
-        restaurantNumberView.setText(restaurantInfo.get(2));
+        restaurantNumberView.setText(restaurantInformation.get(2));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // http request to fetch image and load into the view
         ImageView restaurantImageView = findViewById(R.id.imageView);
+//        Picasso.get()
+//                .load("https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg")
+//                .into(restaurantImageView);
         Picasso.get()
-                .load("https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg")
+                .load(restaurantInformation.get(3))
                 .into(restaurantImageView);
 
         // Fab
@@ -78,7 +81,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
         // set onclick listener for booking activity and add information about the restaurant
         final Intent intent = new Intent(this, BookingActivity.class);
-        intent.putExtra(RESTAURANT_REPLY, restaurantInfo.get(0));
+        intent.putExtra(RESTAURANT_REPLY, restaurantInformation.get(0));
         fab.setOnClickListener(view -> startActivity(intent));
 
     }
