@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
-import org.osmdroid.tileprovider.tilesource.XYTileSource;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
@@ -86,15 +86,16 @@ public class RestaurantActivity extends AppCompatActivity {
     private void initializeMap() {
         map = findViewById(R.id.map);
 
-        // set source to load from openstreetmap (remote)
-        map.setTileSource(
-                new XYTileSource("HttpMapnik",
-                        0, 19, 256, ".png", new String[]{
-                        "http://a.tile.openstreetmap.org/",
-                        "http://b.tile.openstreetmap.org/",
-                        "http://c.tile.openstreetmap.org/"},
-                        "© OpenStreetMap contributors")
-        );
+        map.setTileSource(TileSourceFactory.MAPNIK);
+        // set source to load from openstreetmap (remote), note: doesn't work on an emulator
+//        map.setTileSource(
+//                new XYTileSource("HttpMapnik",
+//                        0, 19, 256, ".png", new String[]{
+//                        "http://a.tile.openstreetmap.org/",
+//                        "http://b.tile.openstreetmap.org/",
+//                        "http://c.tile.openstreetmap.org/"},
+//                        "© OpenStreetMap contributors")
+//        );
 
         map.setMultiTouchControls(true);
         map.setTilesScaledToDpi(true);
