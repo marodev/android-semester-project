@@ -78,7 +78,7 @@ public class SearchConfiguration {
         // default location: Duomo of Milan, Italy
         private double latitude = 45.464211;
         private double longitude = 9.191383;
-        private int maxNumberOfResults = 10;
+        private int maxNumberOfResults = 20;
         private String searchKeyword = "";
         private String cuisineIds = "";
 
