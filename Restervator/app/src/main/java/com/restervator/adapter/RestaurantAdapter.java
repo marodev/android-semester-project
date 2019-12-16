@@ -18,8 +18,6 @@ import com.restervator.RestaurantActivity;
 import com.restervator.model.domain.Restaurant;
 import com.squareup.picasso.Picasso;
 
-import org.mapsforge.map.layer.overlay.Grid;
-
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -84,7 +82,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         descriptionTextView.setText(restaurant.getFullAddress());
 
         RatingBar ratingBar = viewHolder.ratingBar;
-        ratingBar.setNumStars((int) restaurant.getAvgUserRating());
+        ratingBar.setNumStars((int) Math.round(restaurant.getAvgUserRating()));
 
         TextView avgPriceView = viewHolder.restaurantAvgPriceView;
         String avgPrice = restaurant.getCurrency() + " " + restaurant.getAvgPriceForTwo();
