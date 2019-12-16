@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private RestaurantAdapter adapter;
     private ArrayList<Restaurant> restaurants;
     private RecyclerView rvRestaurants;
+    private Spinner restaurantSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         rvRestaurants = findViewById(R.id.recyclerView);
 
+        // add horizontal divider between items
+        rvRestaurants.addItemDecoration(new DividerItemDecoration(rvRestaurants.getContext(), DividerItemDecoration.VERTICAL));
+
         // add empty data to the adapter
         restaurants = new ArrayList<>();
         adapter = new RestaurantAdapter(MainActivity.this, restaurants);
@@ -60,7 +69,42 @@ public class MainActivity extends AppCompatActivity {
         // Set layout manager to position the items
         rvRestaurants.setLayoutManager(new LinearLayoutManager(this));
 
+        // setup spinner to sort results
+        setupSpinner();
     }
+
+    private void setupSpinner() {
+        restaurantSpinner = findViewById(R.id.restaurantFilter);
+
+        // setup a click listener for the spinner
+        restaurantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long itemID) {
+                if (position == 0) {
+                    searchRestaurantsByRating();
+
+                } else if (position == 1) {
+                    searchNearByRestaurants();
+                } else {
+                    Toast.makeText(MainActivity.this, "Selected sort option does not exist!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // do nothing
+            }
+        });
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.sort_types,
+                android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        restaurantSpinner.setAdapter(adapter);
+    }
+
 
     @Override
     protected void onResume() {
@@ -83,8 +127,26 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // get last known position and fetch the data from the API
-            searchNearByRestaurants();
+            searchRestaurantsByRating();
         }
+    }
+
+    // search restaurants based on the current location and highest rating
+    private void searchRestaurantsByRating() {
+        // get last known location, add asynchronous callback.
+        locationFetcher.getLastKnownLocation(location -> {
+            Log.d(LOG_TAG, "received location: " + location.toString());
+            // use the fluent builder to create a configuration for the Zomato API.
+            SearchConfiguration configuration = new SearchConfiguration.Builder()
+                    .nearLocation(location)
+                    .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.RATING)
+                    .withSortOrder(SearchConfiguration.SortOrder.DESC)
+                    .limitNumberOfResults(40)
+                    .build();
+
+            // trigger a search, add asynchronous callback.
+            client.search(configuration, this::displayData);
+        });
     }
 
 
@@ -99,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                     .nearLocation(location)
                     .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.REAL_DISTANCE)
                     .withSortOrder(SearchConfiguration.SortOrder.ASC)
-                    .limitNumberOfResults(10)
+                    .limitNumberOfResults(20)
                     .build();
 
             // trigger a search, add asynchronous callback.

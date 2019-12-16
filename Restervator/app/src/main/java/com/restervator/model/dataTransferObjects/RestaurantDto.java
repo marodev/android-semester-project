@@ -137,9 +137,4 @@ public class RestaurantDto {
         this.phoneNumber = phoneNumber;
     }
 
-
-//    public RestaurantDto() {
-//        this.photos = new ArrayList<>();
-//        this.location = new LocationDto();
-//    }
 }

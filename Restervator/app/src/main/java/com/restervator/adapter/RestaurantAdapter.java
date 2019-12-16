@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +18,7 @@ import com.restervator.RestaurantActivity;
 import com.restervator.model.domain.Restaurant;
 import com.squareup.picasso.Picasso;
 
-import org.mapsforge.map.layer.overlay.Grid;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +40,7 @@ import butterknife.ButterKnife;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
 
-    public static final String EXTRA_REPLY = "com.restervator.adapter.extra.REPLY";;
+    public static final String EXTRA_REPLY = "com.restervator.adapter.extra.REPLY";
 
     private ArrayList<Restaurant> mRestaurants;
     private AdapterView.OnItemClickListener onItemClickListener;
@@ -83,6 +81,15 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         TextView descriptionTextView = viewHolder.descriptionTextView;
         descriptionTextView.setText(restaurant.getFullAddress());
 
+        RatingBar ratingBar = viewHolder.ratingBar;
+        ratingBar.setNumStars((int) Math.round(restaurant.getAvgUserRating()));
+
+        TextView avgPriceView = viewHolder.restaurantAvgPriceView;
+        String avgPrice = restaurant.getCurrency() + " " + restaurant.getAvgPriceForTwo();
+        avgPriceView.setText(avgPrice);
+
+
+        // TODO: add rating and avgPrice (if needed) to the intentMessage
         ArrayList<String> intentMessage = new ArrayList<>();
         intentMessage.add(restaurant.getName());
         intentMessage.add(restaurant.getFullAddress());
@@ -112,12 +119,18 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        // inject views into the layout
         @BindView(R.id.firstimage)
         ImageView firstImage;
         @BindView(R.id.name)
         TextView nameTextView;
         @BindView(R.id.description)
         TextView descriptionTextView;
+        @BindView(R.id.rating)
+        RatingBar ratingBar;
+        @BindView(R.id.restaurantAvgPrice)
+        TextView restaurantAvgPriceView;
+
 
 
         public ViewHolder(View itemView) {

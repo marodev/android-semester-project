@@ -16,7 +16,9 @@ public class DtoToRestaurantConverter {
                 Double.valueOf(dto.getUserRatingDto().getAverageRating()),
                 dto.getPhoneNumber(),
                 dto.getOpeningHours(),
-                dto.getThumbnailUrl());
+                dto.getThumbnailUrl(),
+                dto.getCurrency(),
+                dto.getAverageCostForTwo());
     }
 
     // convert the data received from the api the the actual domain model
