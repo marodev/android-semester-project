@@ -81,7 +81,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
         // set onclick listener for booking activity and add information about the restaurant
         final Intent intent = new Intent(this, BookingActivity.class);
-        intent.putExtra(RESTAURANT_REPLY, restaurantInformation.get(0));
+        intent.putStringArrayListExtra(RESTAURANT_REPLY, restaurantInformation);
         fab.setOnClickListener(view -> startActivity(intent));
 
     }

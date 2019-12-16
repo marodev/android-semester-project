@@ -33,7 +33,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
                 holder.restaurantNameView.setText(current.getName());
             } else {
                 // Covers the case of data not being ready yet.
-                holder.restaurantNameView.setText("No Word");
+                holder.restaurantNameView.setText("No Reservation");
             }
         }
 
@@ -49,6 +49,10 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             if (reservations != null)
                 return reservations.size();
             else return 0;
+        }
+
+         public Reservation getReservationAtPosition (int position) {
+             return reservations.get(position);
         }
 
 

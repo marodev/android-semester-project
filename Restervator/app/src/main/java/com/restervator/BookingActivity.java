@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,6 +21,8 @@ import static mil.nga.tiff.FieldTagType.DateTime;
 
 public class BookingActivity extends AppCompatActivity {
 
+    public static final String RESERVATION_REPLY =
+            "com.restervator.extra.REPLY";
     String restaurantName = "";
     CalendarView calendarView;
     MaterialButtonToggleGroup timeButtonGroup;
@@ -33,7 +36,8 @@ public class BookingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
 
-        restaurantName = getIntent().getExtras().getString(RESTAURANT_REPLY);
+       ArrayList<String> restaurantInformation = getIntent().getStringArrayListExtra(RESTAURANT_REPLY);
+       restaurantName = restaurantInformation.get(0);
 
         TextView restaurantNameView = findViewById(R.id.bookingRestaurantName);
         restaurantNameView.setText(restaurantName);
@@ -68,10 +72,18 @@ public class BookingActivity extends AppCompatActivity {
 
     public void bookRestaurant(View view) {
 
-        Toast.makeText(this, restaurantName +chosenDate + " "+ chosenTime+ " "+ numOfPersons+" has been reserved",
+        Toast.makeText(this, restaurantName +" has been reserved",
                 Toast.LENGTH_LONG).show();
 
+        ArrayList<String> reservationInformation = new ArrayList<>();
+        reservationInformation.add(restaurantName);
+        reservationInformation.add("no image");
+        reservationInformation.add(chosenDate);
+        reservationInformation.add(chosenTime);
+        reservationInformation.add(numOfPersons);
+
         Intent intent = new Intent(this, ReservationOverviewActivity.class);
+        intent.putStringArrayListExtra(RESERVATION_REPLY, reservationInformation );
         startActivity(intent);
     }
 
