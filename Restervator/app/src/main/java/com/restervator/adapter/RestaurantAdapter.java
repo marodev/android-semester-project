@@ -75,7 +75,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         avgPriceView.setText(avgPrice);
 
 
-        // TODO: add rating to the intentMessage
+        // TODO: add rating and avgPrice (if needed) to the intentMessage
         ArrayList<String> intentMessage = new ArrayList<>();
         intentMessage.add(restaurant.getName());
         intentMessage.add(restaurant.getFullAddress());
