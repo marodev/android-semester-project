@@ -65,21 +65,25 @@
 
         <com.google.android.material.button.MaterialButton
             style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/time_12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/noon_12"/>
         <com.google.android.material.button.MaterialButton
             style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/time_13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/noon_13"/>
         <com.google.android.material.button.MaterialButton
             style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/time_14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/noon_14"/>
         <com.google.android.material.button.MaterialButton
             style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/time_15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/noon_15"/>
@@ -141,21 +145,25 @@
 
         <com.google.android.material.button.MaterialButton
             style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/person_count_1_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/num_of_persons_1_2"/>
         <com.google.android.material.button.MaterialButton
             style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/person_count_3_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/num_of_persons_3_4"/>
         <com.google.android.material.button.MaterialButton
             style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/person_count_5_8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/num_of_persons_5_8"/>
         <com.google.android.material.button.MaterialButton
             style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/person_count_9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/num_of_persons_9_above"/>

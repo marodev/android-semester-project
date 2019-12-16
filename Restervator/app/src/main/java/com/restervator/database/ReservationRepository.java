@@ -24,6 +24,14 @@ public class ReservationRepository {
         new insertAsyncTask(reservationDao).execute(reservation);
     }
 
+    public void deleteAll()  {
+        new deleteAllReservationsAsyncTask(reservationDao).execute();
+    }
+
+    public void deleteReservation(Reservation reservation)  {
+        new deleteReservationAsyncTask(reservationDao).execute(reservation);
+    }
+
     private static class insertAsyncTask extends AsyncTask<Reservation, Void, Void> {
 
         private ReservationDao mAsyncTaskDao;
@@ -35,6 +43,34 @@ public class ReservationRepository {
         @Override
         protected Void doInBackground(final Reservation... params) {
             mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+    private static class deleteAllReservationsAsyncTask extends AsyncTask<Void, Void, Void> {
+        private ReservationDao mAsyncTaskDao;
+
+        deleteAllReservationsAsyncTask(ReservationDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mAsyncTaskDao.deleteAll();
+            return null;
+        }
+    }
+
+    private static class deleteReservationAsyncTask extends AsyncTask<Reservation, Void, Void> {
+        private ReservationDao mAsyncTaskDao;
+
+        deleteReservationAsyncTask(ReservationDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Reservation... params) {
+            mAsyncTaskDao.deleteReservation(params[0]);
             return null;
         }
     }
