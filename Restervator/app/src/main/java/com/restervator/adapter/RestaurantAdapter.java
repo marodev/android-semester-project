@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.restervator.R;
 import com.restervator.RestaurantActivity;
 import com.restervator.model.domain.Restaurant;
+import com.squareup.picasso.Picasso;
 
 import org.mapsforge.map.layer.overlay.Grid;
 
@@ -70,7 +71,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         Uri uri  = Uri.parse(restaurant.getThumbnailUrl().split("\\|")[0]);
         ImageView firstImage = viewHolder.firstImage;
-        firstImage.setImageURI(uri);
+       // firstImage.setImageURI(uri);
+
+        Picasso.get()
+                .load(uri)
+                .into(firstImage);
 
         TextView textView = viewHolder.nameTextView;
         textView.setText(restaurant.getName());
