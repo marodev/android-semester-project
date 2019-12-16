@@ -2,6 +2,7 @@ package com.restervator.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.restervator.R;
 import com.restervator.RestaurantActivity;
 import com.restervator.model.domain.Restaurant;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,8 +53,19 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     public void onBindViewHolder(RestaurantAdapter.ViewHolder viewHolder, int position) {
         Restaurant restaurant = mRestaurants.get(position);
 
+        Uri uri  = Uri.parse(restaurant.getThumbnailUrl().split("\\|")[0]);
+        ImageView firstImage = viewHolder.firstImage;
+       // firstImage.setImageURI(uri);
+
+        Picasso.get()
+                .load(uri)
+                .into(firstImage);
+
         TextView textView = viewHolder.nameTextView;
         textView.setText(restaurant.getName());
+
+        TextView descriptionTextView = viewHolder.descriptionTextView;
+        descriptionTextView.setText(restaurant.getFullAddress());
 
         ArrayList<String> intentMessage = new ArrayList<>();
         intentMessage.add(restaurant.getName());
@@ -86,8 +99,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         ImageView firstImage;
         @BindView(R.id.name)
         TextView nameTextView;
-//        @BindView(R.id.description)
-//        TextView descriptionTextView;
+        @BindView(R.id.description)
+        TextView descriptionTextView;
 
 
         public ViewHolder(View itemView) {

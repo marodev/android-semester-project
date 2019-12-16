@@ -23,15 +23,18 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="text_view_style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="name_style">
         <item name="android:textAppearance">
-            @android:style/TextAppearance.Large</item>
+        @android:style/TextAppearance.Large</item>
         <item name="android:layout_gravity">left</item>
-        <item name="android:padding">16dp</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:padding">8dp</item>
+
+    </style>
+
+    <style name="description_style">
+        <item name="android:layout_gravity">left</item>
+        <item name="android:padding">8dp</item>
+
     </style>
 
     <style name="list_imgage_style">

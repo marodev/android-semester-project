@@ -24,12 +24,15 @@
         android:layout_toEndOf="@+id/firstimage"
         android:layout_width="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="0dp"
+        style="@style/name_style"
         android:layout_height="wrap_content"
+        android:text="@string/description"
         />
 
     <TextView
         android:id="@+id/description"
+        style="@style/description_style"
         android:layout_toEndOf="@+id/firstimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
