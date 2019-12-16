@@ -18,11 +18,27 @@ import com.restervator.RestaurantActivity;
 import com.restervator.model.domain.Restaurant;
 import com.squareup.picasso.Picasso;
 
+import org.mapsforge.map.layer.overlay.Grid;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+//<<<<<<< HEAD
+//public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
+//
+//    public class ViewHolder extends RecyclerView.ViewHolder{
+//
+//        @BindView(R.id.firstimage)
+//        ImageView firstImage;
+//        @BindView(R.id.name)
+//        TextView nameTextView;
+//        @BindView(R.id.description)
+//        TextView descriptionTextView;
+//
+//=======
+//>>>>>>> a8ba6754cb030691bfcd1c8d18998c14b852f0ea
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
 
