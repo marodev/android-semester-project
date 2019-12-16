@@ -41,28 +41,34 @@
                     android:layout_marginTop="0dp"
                     android:text="@string/restaurant_name" />
 
-                <RatingBar
-                    android:id="@+id/rating"
-                    style="?android:attr/ratingBarStyleSmall"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="0dp"
+                    android:layout_gravity="end"
                     android:layout_marginEnd="8dp"
-                    android:numStars="5"
-                    android:saveEnabled="false"
-                    android:theme="@style/RatingBar" />
-                <!--                -->
-                <!--                <TextView-->
-                <!--                    android:id="@+id/rating"-->
-                <!--                    style="@style/name_style"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_alignParentEnd="true"-->
-                <!--                    android:layout_marginStart="16dp"-->
-                <!--                    android:layout_marginTop="0dp"-->
-                <!--                    android:text="@string/restaurant_rating" />-->
+                    android:orientation="vertical">
+
+                    <RatingBar
+                        android:id="@+id/rating"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="0dp"
+                        android:numStars="5"
+                        android:saveEnabled="false"
+                        android:theme="@style/RatingBar" />
+
+                    <TextView
+                        android:id="@+id/bla"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="16dp"
+                        android:text="CHF 200" />
+                </LinearLayout>
             </RelativeLayout>
 
             <TextView
