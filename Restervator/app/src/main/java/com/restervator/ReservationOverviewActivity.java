@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.restervator.BookingActivity.RESERVATION_REPLY;
-import static com.restervator.RestaurantActivity.RESTAURANT_REPLY;
 
 public class ReservationOverviewActivity extends AppCompatActivity {
 
@@ -40,15 +38,16 @@ public class ReservationOverviewActivity extends AppCompatActivity {
         //initialise the reservationViewModel
         reservationViewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
 
-
-        //get reservation data from intent and store it in the database.
-        ArrayList<String> reservationInformation = getIntent().getStringArrayListExtra(RESERVATION_REPLY);
-        Reservation reservation = new Reservation(reservationInformation.get(0),
-                reservationInformation.get(1),
-                reservationInformation.get(2),
-                reservationInformation.get(3),
-                1);
-        reservationViewModel.insert(reservation);
+        if (getIntent().hasExtra(RESERVATION_REPLY)) {
+            //get reservation data from intent and store it in the database.
+            ArrayList<String> reservationInformation = getIntent().getStringArrayListExtra(RESERVATION_REPLY);
+            Reservation reservation = new Reservation(reservationInformation.get(0),
+                    reservationInformation.get(1),
+                    reservationInformation.get(2),
+                    reservationInformation.get(3),
+                    1);
+            reservationViewModel.insert(reservation);
+        }
 
         //        Picasso.get()
 //                .load("https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg")
