@@ -37,6 +37,7 @@
     </string>
     <string name="list_image">firstimage</string>
     <string name="more_information">More information</string>
+    <string name="restaurant_avg_price">$$</string>
 
     <string-array name="sort_types">
         <item>Highest rating</item>

@@ -70,6 +70,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         RatingBar ratingBar = viewHolder.ratingBar;
         ratingBar.setNumStars((int) restaurant.getAvgUserRating());
 
+        TextView avgPriceView = viewHolder.restaurantAvgPriceView;
+        String avgPrice = restaurant.getCurrency() + " " + restaurant.getAvgPriceForTwo();
+        avgPriceView.setText(avgPrice);
+
 
         // TODO: add rating to the intentMessage
         ArrayList<String> intentMessage = new ArrayList<>();
@@ -109,6 +113,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         TextView descriptionTextView;
         @BindView(R.id.rating)
         RatingBar ratingBar;
+        @BindView(R.id.restaurantAvgPrice)
+        TextView restaurantAvgPriceView;
 
 
 
