@@ -26,10 +26,18 @@
             tools:replace="android:value" />
 
 
-        <activity android:name=".ReservationOverviewActivity"></activity>
+        <activity
+            android:name=".ReservationOverviewActivity"
+            android:label="My Reservations"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.restervator.MainActivity" />
+
+        </activity>
         <activity
             android:name=".BookingActivity"
-            android:label="Booking Activity"
+            android:label="Booking"
             android:parentActivityName=".RestaurantActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -37,7 +45,6 @@
         </activity>
         <activity
             android:name=".RestaurantActivity"
-            android:label="Restaurant Activity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -45,7 +52,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="Restaurants">
+            android:label="Restaurants"
+            android:launchMode="singleTask">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

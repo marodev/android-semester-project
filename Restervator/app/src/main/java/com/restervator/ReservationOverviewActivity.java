@@ -1,5 +1,6 @@
 package com.restervator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -84,5 +85,10 @@ public class ReservationOverviewActivity extends AppCompatActivity {
         helper.attachToRecyclerView(recyclerView);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        // go back to MainActivity - Restaurants
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
