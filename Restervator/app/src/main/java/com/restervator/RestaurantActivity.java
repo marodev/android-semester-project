@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.squareup.picasso.Picasso;
+import com.restervator.utils.ImageUtil;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -70,10 +70,9 @@ public class RestaurantActivity extends AppCompatActivity {
         restaurantNumberView.setText(restaurantInformation.get(2));
 
         ImageView restaurantImageView = findViewById(R.id.imageView);
+
         // http request to fetch image and load into the view
-        Picasso.get()
-                .load(restaurantInformation.get(3))
-                .into(restaurantImageView);
+        ImageUtil.loadImage(restaurantInformation.get(3), restaurantImageView);
 
         // Fab
         ExtendedFloatingActionButton fab = findViewById(R.id.fab);

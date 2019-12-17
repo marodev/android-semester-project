@@ -49,8 +49,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     public void onBindViewHolder(RestaurantAdapter.ViewHolder viewHolder, int position) {
         Restaurant restaurant = mRestaurants.get(position);
 
-        ImageView thumbNailView = viewHolder.firstImage;
-        ImageUtil.loadImage(restaurant.getThumbnailUrl(), thumbNailView);
+        ImageView thumbnailView = viewHolder.firstImage;
+        ImageUtil.loadImage(restaurant.getThumbnailUrl(), thumbnailView);
 
         TextView textView = viewHolder.nameTextView;
         textView.setText(restaurant.getName());
