@@ -17,7 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.squareup.picasso.Picasso;
+import com.restervator.utils.ImageUtil;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -55,14 +55,17 @@ public class RestaurantActivity extends AppCompatActivity {
         // inflate view
         setContentView(R.layout.activity_restaurant);
 
-        // create and inflate map. Zoom to restaurant and add icon
-        initializeMap();
-
         // Fetching restaurant image, name, and Fab controls
         ArrayList<String> restaurantInformation = getIntent().getStringArrayListExtra(EXTRA_REPLY);
 
+        String restaurantName = restaurantInformation.get(0);
+
+        // dynamically change title
+        setTitle(restaurantName);
+
+        // put the information from the intent into the views
         TextView restaurantNameView = findViewById(R.id.restaurantName);
-        restaurantNameView.setText(restaurantInformation.get(0));
+        restaurantNameView.setText(restaurantName);
 
         TextView restaurantAddressView = findViewById(R.id.restaurantAddress);
         restaurantAddressView.setText(restaurantInformation.get(1));
@@ -70,17 +73,13 @@ public class RestaurantActivity extends AppCompatActivity {
         TextView restaurantNumberView = findViewById(R.id.restaurantNumber);
         restaurantNumberView.setText(restaurantInformation.get(2));
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        ImageView restaurantImageView = findViewById(R.id.imageView);
 
         // http request to fetch image and load into the view
-        ImageView restaurantImageView = findViewById(R.id.imageView);
-//        Picasso.get()
-//                .load("https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg")
-//                .into(restaurantImageView);
-        Picasso.get()
-                .load(restaurantInformation.get(3))
-                .into(restaurantImageView);
+        ImageUtil.loadImage(restaurantInformation.get(3), restaurantImageView);
+
+        // create and inflate map. Zoom to restaurant and add icon
+        initializeMap(Double.valueOf(restaurantInformation.get(4)), Double.valueOf(restaurantInformation.get(5)));
 
         // Fab
         ExtendedFloatingActionButton fab = findViewById(R.id.fab);
@@ -92,7 +91,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
     }
 
-    private void initializeMap() {
+    private void initializeMap(double latitude, double longitude) {
         map = findViewById(R.id.map);
 
         map.setTileSource(TileSourceFactory.MAPNIK);
@@ -111,27 +110,21 @@ public class RestaurantActivity extends AppCompatActivity {
 
         IMapController mapController = map.getController();
 
-        //sets the starting point on the map to the long and lat of Milan
-        GeoPoint startPoint = new GeoPoint(45.4642, 9.1900);
+        //sets the starting point on the map
+        GeoPoint startPoint = new GeoPoint(latitude, longitude);
         mapController.setCenter(startPoint);
         mapController.setZoom(16.0);
 
-        // TODO: enable user location
-        //adds the user location on the map. This is not yet working, right now default location is set to milan below
-//        this.mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(ctx), map);
-//        this.mLocationOverlay.enableMyLocation();
-//        map.getOverlays().add(this.mLocationOverlay);
-
-        addRestaurantIconToMap();
+        addRestaurantIconToMap(latitude, longitude);
     }
 
-    private void addRestaurantIconToMap() {
+    private void addRestaurantIconToMap(double latitude, double longitude) {
 
         // list to hold the references to the icons
         final ArrayList<OverlayItem> items = new ArrayList<>();
 
-        // add icon for the restaurant // TODO: currently set to Milano
-        items.add(new OverlayItem("Milano", "SampleDescription", new GeoPoint(45.4642, 9.1900)));
+        // add icon for the restaurant
+        items.add(new OverlayItem("Restaurant", "The Restaurant", new GeoPoint(latitude, longitude)));
 
         // add icon to the map
         ItemizedOverlay<OverlayItem> mMyLocationOverlay = new ItemizedIconOverlay<>(items, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {

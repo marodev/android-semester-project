@@ -25,34 +25,36 @@
             android:value="12451000"
             tools:replace="android:value" />
 
+
         <activity
             android:name=".ReservationOverviewActivity"
-            android:label="Reservation Overview Activity"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="My Reservations"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.restervator.MainActivity" />
+
         </activity>
         <activity
             android:name=".BookingActivity"
-            android:label="Booking Activity"
-            android:parentActivityName=".RestaurantActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="Booking"
+            android:parentActivityName=".RestaurantActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.restervator.RestaurantActivity" />
         </activity>
         <activity
             android:name=".RestaurantActivity"
-            android:label="Restaurant Activity"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.restervator.MainActivity" />
         </activity>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:label="Restaurants"
+            android:launchMode="singleTask">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

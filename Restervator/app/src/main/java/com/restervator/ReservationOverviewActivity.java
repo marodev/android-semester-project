@@ -75,12 +75,12 @@ public class ReservationOverviewActivity extends AppCompatActivity {
                     public void onSwiped(RecyclerView.ViewHolder viewHolder,
                                          int direction) {
                         int position = viewHolder.getAdapterPosition();
-                        Reservation myWord = adapter.getReservationAtPosition(position);
+                        Reservation reservation = adapter.getReservationAtPosition(position);
                         Toast.makeText(ReservationOverviewActivity.this, "Deleting " +
-                                myWord.getName(), Toast.LENGTH_LONG).show();
+                                reservation.getName(), Toast.LENGTH_LONG).show();
 
                         // Delete the word
-                        reservationViewModel.deleteWord(myWord);
+                        reservationViewModel.deleteReservation(reservation);
                     }
                 });
 
@@ -88,13 +88,9 @@ public class ReservationOverviewActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed()
-    {
-        super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
-
+    public void onBackPressed() {
+        // go back to MainActivity - Restaurants
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
-
-
 }

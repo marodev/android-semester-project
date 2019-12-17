@@ -81,10 +81,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long itemID) {
                 if (position == 0) {
-                    searchRestaurantsByRating();
-
+                    searchRestaurantsByHighestRating();
                 } else if (position == 1) {
-                    searchNearByRestaurants();
+                    searchNearByClosestLocation();
+                } else if (position == 2) {
+                    searchRestaurantsByLowestCost();
                 } else {
                     Toast.makeText(MainActivity.this, "Selected sort option does not exist!", Toast.LENGTH_SHORT).show();
                 }
@@ -127,46 +128,50 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // get last known position and fetch the data from the API
-            searchRestaurantsByRating();
+            searchRestaurantsByHighestRating();
         }
     }
 
-    // search restaurants based on the current location and highest rating
-    private void searchRestaurantsByRating() {
+    private void search(SearchConfiguration.Builder builder) {
         // get last known location, add asynchronous callback.
         locationFetcher.getLastKnownLocation(location -> {
             Log.d(LOG_TAG, "received location: " + location.toString());
             // use the fluent builder to create a configuration for the Zomato API.
-            SearchConfiguration configuration = new SearchConfiguration.Builder()
-                    .nearLocation(location)
-                    .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.RATING)
-                    .withSortOrder(SearchConfiguration.SortOrder.DESC)
-                    .limitNumberOfResults(40)
-                    .build();
-
+            builder.nearLocation(location);
             // trigger a search, add asynchronous callback.
-            client.search(configuration, this::displayData);
+            client.search(builder.build(), this::displayData);
         });
     }
 
+    // search restaurants based on the lowest price
+    private void searchRestaurantsByLowestCost() {
+        // use the fluent builder to create a configuration for the Zomato API.
+        SearchConfiguration.Builder builder = new SearchConfiguration.Builder()
+                .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.COST)
+                .withSortOrder(SearchConfiguration.SortOrder.ASC)
+                .limitNumberOfResults(20);
+
+        search(builder);
+    }
+
+    // search restaurants based on the current location and highest rating
+    private void searchRestaurantsByHighestRating() {
+        // use the fluent builder to create a configuration for the Zomato API.
+        SearchConfiguration.Builder builder = new SearchConfiguration.Builder()
+                .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.RATING)
+                .withSortOrder(SearchConfiguration.SortOrder.DESC)
+                .limitNumberOfResults(20);
+        search(builder);
+    }
 
     // search restaurants based on the current location.
-    private void searchNearByRestaurants() {
-        // get last known location, add asynchronous callback.
-        locationFetcher.getLastKnownLocation(location -> {
-            Log.d(LOG_TAG, "received location: " + location.toString());
-
-            // use the fluent builder to create a configuration for the Zomato API.
-            SearchConfiguration configuration = new SearchConfiguration.Builder()
-                    .nearLocation(location)
-                    .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.REAL_DISTANCE)
-                    .withSortOrder(SearchConfiguration.SortOrder.ASC)
-                    .limitNumberOfResults(20)
-                    .build();
-
-            // trigger a search, add asynchronous callback.
-            client.search(configuration, this::displayData);
-        });
+    private void searchNearByClosestLocation() {
+        // use the fluent builder to create a configuration for the Zomato API.
+        SearchConfiguration.Builder builder = new SearchConfiguration.Builder()
+                .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.REAL_DISTANCE)
+                .withSortOrder(SearchConfiguration.SortOrder.ASC)
+                .limitNumberOfResults(20);
+        search(builder);
     }
 
     // convert remote data and display the data to the user interface

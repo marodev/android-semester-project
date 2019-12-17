@@ -42,6 +42,7 @@
     <string-array name="sort_types">
         <item>Highest rating</item>
         <item>Closest distance</item>
+        <item>Lowest price</item>
     </string-array>
 
 </resources>
