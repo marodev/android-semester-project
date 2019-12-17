@@ -39,6 +39,7 @@
     <string name="more_information">More information</string>
     <string name="restaurant_avg_price">$$</string>
     <string name="no_reservation">No Reservation</string>
+    <string name="sort_by">Sort by</string>
 
     <string-array name="sort_types">
         <item>Highest rating</item>
