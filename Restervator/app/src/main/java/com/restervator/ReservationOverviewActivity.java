@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -16,7 +15,6 @@ import com.restervator.database.Reservation;
 import com.restervator.database.ReservationViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.restervator.BookingActivity.RESERVATION_REPLY;
 
@@ -56,8 +54,7 @@ public class ReservationOverviewActivity extends AppCompatActivity {
             reservationViewModel.insert(reservation);
         }
 
-        reservationViewModel.getAllReservations().observe(this, (@Nullable final List<Reservation> reservations) ->
-                adapter.setReservations(reservations));
+        reservationViewModel.getAllReservations().observe(this, adapter::setReservations);
 
 
         // Functionality to swipe an item to delete it
