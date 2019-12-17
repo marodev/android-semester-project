@@ -48,8 +48,7 @@ public class RestaurantActivity extends AppCompatActivity {
         // inflate view
         setContentView(R.layout.activity_restaurant);
 
-        // create and inflate map. Zoom to restaurant and add icon
-        initializeMap();
+
 
         // Fetching restaurant image, name, and Fab controls
         ArrayList<String> restaurantInformation = getIntent().getStringArrayListExtra(EXTRA_REPLY);
@@ -74,18 +73,20 @@ public class RestaurantActivity extends AppCompatActivity {
         // http request to fetch image and load into the view
         ImageUtil.loadImage(restaurantInformation.get(3), restaurantImageView);
 
+        // create and inflate map. Zoom to restaurant and add icon
+        initializeMap(Double.valueOf(restaurantInformation.get(4)), Double.valueOf(restaurantInformation.get(5)));
+
         // Fab
         ExtendedFloatingActionButton fab = findViewById(R.id.fab);
 
         // set onclick listener for booking activity and add information about the restaurant
         final Intent intent = new Intent(this, BookingActivity.class);
         intent.putStringArrayListExtra(RESTAURANT_REPLY, restaurantInformation);
-//        intent.put
         fab.setOnClickListener(view -> startActivity(intent));
 
     }
 
-    private void initializeMap() {
+    private void initializeMap(double latitude, double longitude) {
         map = findViewById(R.id.map);
 
         map.setTileSource(TileSourceFactory.MAPNIK);
@@ -104,27 +105,21 @@ public class RestaurantActivity extends AppCompatActivity {
 
         IMapController mapController = map.getController();
 
-        //sets the starting point on the map to the long and lat of Milan
-        GeoPoint startPoint = new GeoPoint(45.4642, 9.1900);
+        //sets the starting point on the map
+        GeoPoint startPoint = new GeoPoint(latitude, longitude);
         mapController.setCenter(startPoint);
         mapController.setZoom(16.0);
 
-        // TODO: enable user location
-        //adds the user location on the map. This is not yet working, right now default location is set to milan below
-//        this.mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(ctx), map);
-//        this.mLocationOverlay.enableMyLocation();
-//        map.getOverlays().add(this.mLocationOverlay);
-
-        addRestaurantIconToMap();
+        addRestaurantIconToMap(latitude, longitude);
     }
 
-    private void addRestaurantIconToMap() {
+    private void addRestaurantIconToMap(double latitude, double longitude) {
 
         // list to hold the references to the icons
         final ArrayList<OverlayItem> items = new ArrayList<>();
 
-        // add icon for the restaurant // TODO: currently set to Milano
-        items.add(new OverlayItem("Milano", "SampleDescription", new GeoPoint(45.4642, 9.1900)));
+        // add icon for the restaurant
+        items.add(new OverlayItem("Restaurant", "The Restaurant", new GeoPoint(latitude, longitude)));
 
         // add icon to the map
         ItemizedOverlay<OverlayItem> mMyLocationOverlay = new ItemizedIconOverlay<>(items, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
