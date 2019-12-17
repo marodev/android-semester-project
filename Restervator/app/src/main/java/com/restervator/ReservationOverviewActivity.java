@@ -79,7 +79,7 @@ public class ReservationOverviewActivity extends AppCompatActivity {
                         Toast.makeText(ReservationOverviewActivity.this, "Deleting " +
                                 reservation.getName(), Toast.LENGTH_LONG).show();
 
-                        // Delete the word
+                        // Delete the reservation
                         reservationViewModel.deleteReservation(reservation);
                     }
                 });
