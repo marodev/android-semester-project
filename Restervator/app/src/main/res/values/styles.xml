@@ -25,15 +25,15 @@
 
     <style name="name_style">
         <item name="android:textAppearance">
-        @android:style/TextAppearance.Large</item>
+        @android:style/TextAppearance.Medium</item>
         <item name="android:layout_gravity">left</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:padding">0dp</item>
 
     </style>
 
     <style name="description_style">
         <item name="android:layout_gravity">left</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:padding">0dp</item>
 
     </style>
 
@@ -48,6 +48,7 @@
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/colorPrimary</item>
         <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="android:padding">0dp</item>
     </style>
 
 </resources>
