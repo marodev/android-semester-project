@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private LocationFetcher locationFetcher;
     private RestaurantAdapter adapter;
     private ArrayList<Restaurant> restaurants;
-    private RecyclerView rvRestaurants;
-    private Spinner restaurantSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         // prompt user to turn on location
         PermissionUtil.askUserForLocationPermission(this, REQUEST_LOCATION_PERMISSION);
 
-        rvRestaurants = findViewById(R.id.recyclerView);
+        RecyclerView rvRestaurants = findViewById(R.id.recyclerView);
 
         // add horizontal divider between items
         rvRestaurants.addItemDecoration(new DividerItemDecoration(rvRestaurants.getContext(), DividerItemDecoration.VERTICAL));
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupSpinner() {
-        restaurantSpinner = findViewById(R.id.restaurantFilter);
+        Spinner restaurantSpinner = findViewById(R.id.restaurantFilter);
 
         // setup a click listener for the spinner
         restaurantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

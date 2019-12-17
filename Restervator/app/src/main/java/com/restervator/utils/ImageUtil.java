@@ -14,13 +14,9 @@ public class ImageUtil {
 
         // only load image if url is present, otherwise load default placeholder
         if (hasThumbnail) {
-            Picasso.get()
-                    .load(uri)
-                    .into(view);
+            Picasso.get().load(uri).into(view);
         } else {
-            Picasso.get()
-                    .load(R.drawable.ic_no_image)
-                    .into(view);
+            Picasso.get().load(R.drawable.ic_no_image).into(view);
         }
     }
 }
