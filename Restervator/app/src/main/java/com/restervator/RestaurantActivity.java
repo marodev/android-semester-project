@@ -69,10 +69,6 @@ public class RestaurantActivity extends AppCompatActivity {
         TextView restaurantNumberView = findViewById(R.id.restaurantNumber);
         restaurantNumberView.setText(restaurantInformation.get(2));
 
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
-
         ImageView restaurantImageView = findViewById(R.id.imageView);
         // http request to fetch image and load into the view
         Picasso.get()
@@ -85,6 +81,7 @@ public class RestaurantActivity extends AppCompatActivity {
         // set onclick listener for booking activity and add information about the restaurant
         final Intent intent = new Intent(this, BookingActivity.class);
         intent.putStringArrayListExtra(RESTAURANT_REPLY, restaurantInformation);
+//        intent.put
         fab.setOnClickListener(view -> startActivity(intent));
 
     }

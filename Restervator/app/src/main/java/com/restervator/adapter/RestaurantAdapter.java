@@ -2,7 +2,6 @@ package com.restervator.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,9 +39,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     @Override
     public RestaurantAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-
         LayoutInflater inflater = LayoutInflater.from(context);
-
         View RestaurantView = inflater.inflate(R.layout.recyclerview_item, parent, false);
 
         return new ViewHolder(RestaurantView);
@@ -52,12 +49,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     public void onBindViewHolder(RestaurantAdapter.ViewHolder viewHolder, int position) {
         Restaurant restaurant = mRestaurants.get(position);
 
-        Uri uri = Uri.parse(restaurant.getThumbnailUrl().split("\\|")[0]);
         ImageView firstImage = viewHolder.firstImage;
-        // firstImage.setImageURI(uri);
 
         Picasso.get()
-                .load(uri)
+                .load(restaurant.getThumbnailUrl())
                 .into(firstImage);
 
         TextView textView = viewHolder.nameTextView;
@@ -79,7 +74,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         intentMessage.add(restaurant.getName());
         intentMessage.add(restaurant.getFullAddress());
         intentMessage.add(restaurant.getPhoneNumber());
-        intentMessage.add(uri.toString());
+        intentMessage.add(restaurant.getThumbnailUrl());
 
         viewHolder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, RestaurantActivity.class);
