@@ -49,17 +49,7 @@
                     android:layout_marginEnd="8dp"
                     android:orientation="vertical">
 
-                    <RatingBar
-                        android:id="@+id/rating"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="0dp"
-                        android:numStars="5"
-                        android:saveEnabled="false"
-                        android:theme="@style/RatingBar" />
+
 
                     <TextView
                         android:id="@+id/restaurantAvgPrice"
@@ -67,7 +57,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
                         android:text="@string/restaurant_avg_price" />
+
                 </LinearLayout>
             </RelativeLayout>
 
@@ -78,6 +71,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/restaurant_address" />
+
+            <RatingBar
+                android:id="@+id/rating"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="0dp"
+                android:numStars="5"
+                android:saveEnabled="false"
+                android:theme="@style/RatingBar" />
+
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
