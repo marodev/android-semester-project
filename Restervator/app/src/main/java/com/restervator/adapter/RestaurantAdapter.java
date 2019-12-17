@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.restervator.R;
 import com.restervator.RestaurantActivity;
 import com.restervator.model.domain.Restaurant;
-import com.squareup.picasso.Picasso;
+import com.restervator.utils.ImageUtil;
 
 import java.util.ArrayList;
 
@@ -49,11 +49,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     public void onBindViewHolder(RestaurantAdapter.ViewHolder viewHolder, int position) {
         Restaurant restaurant = mRestaurants.get(position);
 
-        ImageView firstImage = viewHolder.firstImage;
-
-        Picasso.get()
-                .load(restaurant.getThumbnailUrl())
-                .into(firstImage);
+        ImageView thumbNailView = viewHolder.firstImage;
+        ImageUtil.loadImage(restaurant.getThumbnailUrl(), thumbNailView);
 
         TextView textView = viewHolder.nameTextView;
         textView.setText(restaurant.getName());
