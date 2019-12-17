@@ -21,7 +21,7 @@ public class LocationFetcher {
     public void getLastKnownLocation(final LocationResponseListener listener) {
 
         // guard - check if permission is granted. otherwise abort.
-        if (!PermissionUtil.isPermissionGranted(this.context)) {
+        if (!PermissionUtil.isLocationPermissionGranted(this.context)) {
             return;
         }
 

@@ -27,7 +27,7 @@ public class PermissionUtil {
         return grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
     }
 
-    public static boolean isPermissionGranted(Context context) {
+    public static boolean isLocationPermissionGranted(Context context) {
         return ActivityCompat.
                 checkSelfPermission(context,
                         Manifest.permission.ACCESS_FINE_LOCATION)
