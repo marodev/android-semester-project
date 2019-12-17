@@ -142,14 +142,14 @@ public class RestaurantActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        //this will refresh the osmdroid configuration on resuming.
+        // this will refresh the osmdroid configuration on resuming.
         map.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        //this will refresh the osmdroid configuration on resuming.
+        // this will refresh the osmdroid configuration on resuming.
         map.onPause();
     }
 
