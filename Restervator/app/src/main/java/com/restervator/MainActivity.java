@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         // get last known location, add asynchronous callback.
         locationFetcher.getLastKnownLocation(location -> {
             Log.d(LOG_TAG, "received location: " + location.toString());
-            // use the fluent builder to create a configuration for the Zomato API.
+            // add location to the builder
             builder.nearLocation(location);
             // trigger a search, add asynchronous callback.
             client.search(builder.build(), this::displayData);
@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.RATING)
                 .withSortOrder(SearchConfiguration.SortOrder.DESC)
                 .limitNumberOfResults(20);
+
         search(builder);
     }
 
@@ -171,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.REAL_DISTANCE)
                 .withSortOrder(SearchConfiguration.SortOrder.ASC)
                 .limitNumberOfResults(20);
+
         search(builder);
     }
 
