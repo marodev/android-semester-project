@@ -23,21 +23,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-//<<<<<<< HEAD
-//public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
-//
-//    public class ViewHolder extends RecyclerView.ViewHolder{
-//
-//        @BindView(R.id.firstimage)
-//        ImageView firstImage;
-//        @BindView(R.id.name)
-//        TextView nameTextView;
-//        @BindView(R.id.description)
-//        TextView descriptionTextView;
-//
-//=======
-//>>>>>>> a8ba6754cb030691bfcd1c8d18998c14b852f0ea
-
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
 
     public static final String EXTRA_REPLY = "com.restervator.adapter.extra.REPLY";
@@ -58,7 +43,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View RestaurantView = inflater.inflate(R.layout.recyclerview_item, parent,false);
+        View RestaurantView = inflater.inflate(R.layout.recyclerview_item, parent, false);
 
         return new ViewHolder(RestaurantView);
     }
@@ -67,9 +52,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     public void onBindViewHolder(RestaurantAdapter.ViewHolder viewHolder, int position) {
         Restaurant restaurant = mRestaurants.get(position);
 
-        Uri uri  = Uri.parse(restaurant.getThumbnailUrl().split("\\|")[0]);
+        Uri uri = Uri.parse(restaurant.getThumbnailUrl().split("\\|")[0]);
         ImageView firstImage = viewHolder.firstImage;
-       // firstImage.setImageURI(uri);
+        // firstImage.setImageURI(uri);
 
         Picasso.get()
                 .load(uri)
@@ -109,15 +94,15 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         return mRestaurants.size();
     }
 
-    public interface OnItemClickListener{
-        void onItemClickListener(int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = (AdapterView.OnItemClickListener) onItemClickListener;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public interface OnItemClickListener {
+        void onItemClickListener(int position);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         // inject views into the layout
         @BindView(R.id.firstimage)
@@ -130,7 +115,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         RatingBar ratingBar;
         @BindView(R.id.restaurantAvgPrice)
         TextView restaurantAvgPriceView;
-
 
 
         public ViewHolder(View itemView) {
