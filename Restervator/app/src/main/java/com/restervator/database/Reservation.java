@@ -33,6 +33,7 @@ public class Reservation {
         this.numOfPersons = numOfPersons;
 
     }
+
     public String getImage() {
         return image;
     }

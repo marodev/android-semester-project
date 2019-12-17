@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -16,7 +15,6 @@ import com.restervator.database.Reservation;
 import com.restervator.database.ReservationViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.restervator.BookingActivity.RESERVATION_REPLY;
 
@@ -29,24 +27,24 @@ public class ReservationOverviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation_overview);
 
-        //initialises the recycler view
+        // initialises the recycler view
         RecyclerView recyclerView = findViewById(R.id.recyclerView2);
         final ReservationAdapter adapter = new ReservationAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        //initialise the reservationViewModel
+        // initialise the reservationViewModel
         reservationViewModel = ViewModelProviders.of(this).get(ReservationViewModel.class);
 
         if (getIntent().hasExtra(RESERVATION_REPLY)) {
-            //get reservation data from intent and store it in the database.
+            // get reservation data from intent and store it in the database.
             ArrayList<String> reservationInformation = getIntent().getStringArrayListExtra(RESERVATION_REPLY);
-            int numberOfPerson ;//= Integer.valueOf(reservationInformation.get(4).split("-")[1]);
-            if(reservationInformation.get(4).equals("9+")){
+            int numberOfPerson;//= Integer.valueOf(reservationInformation.get(4).split("-")[1]);
+            if (reservationInformation.get(4).equals("9+")) {
                 numberOfPerson = 9;
-            }else{
-               numberOfPerson  = Integer.valueOf(reservationInformation.get(4).split("-")[1]);
+            } else {
+                numberOfPerson = Integer.valueOf(reservationInformation.get(4).split("-")[1]);
             }
             Reservation reservation = new Reservation(reservationInformation.get(0),
                     reservationInformation.get(1),
@@ -56,14 +54,13 @@ public class ReservationOverviewActivity extends AppCompatActivity {
             reservationViewModel.insert(reservation);
         }
 
-        reservationViewModel.getAllReservations().observe(this, (@Nullable final List<Reservation> reservations) ->
-                adapter.setReservations(reservations) );
+        reservationViewModel.getAllReservations().observe(this, adapter::setReservations);
 
 
-        ///Functionality to swipe an item to delete it
+        // Functionality to swipe an item to delete it
         ItemTouchHelper helper = new ItemTouchHelper(
                 new ItemTouchHelper.SimpleCallback(0,
-                        ItemTouchHelper.LEFT ) {
+                        ItemTouchHelper.LEFT) {
                     @Override
                     public boolean onMove(RecyclerView recyclerView,
                                           RecyclerView.ViewHolder viewHolder,
@@ -79,7 +76,7 @@ public class ReservationOverviewActivity extends AppCompatActivity {
                         Toast.makeText(ReservationOverviewActivity.this, "Deleting " +
                                 reservation.getName(), Toast.LENGTH_LONG).show();
 
-                        // Delete the word
+                        // Delete the reservation
                         reservationViewModel.deleteReservation(reservation);
                     }
                 });

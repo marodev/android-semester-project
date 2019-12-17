@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -27,7 +26,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     public static final String EXTRA_REPLY = "com.restervator.adapter.extra.REPLY";
 
     private ArrayList<Restaurant> mRestaurants;
-    private AdapterView.OnItemClickListener onItemClickListener;
     private Context context;
 
 
@@ -88,14 +86,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         return mRestaurants.size();
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = (AdapterView.OnItemClickListener) onItemClickListener;
-    }
-
-    public interface OnItemClickListener {
-        void onItemClickListener(int position);
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         // inject views into the layout
@@ -112,10 +102,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
 
         public ViewHolder(View itemView) {
-
             super(itemView);
             ButterKnife.bind(this, itemView);
-
         }
     }
 

@@ -32,13 +32,11 @@ import static com.restervator.converter.DtoToRestaurantConverter.convertToRestau
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private ZomatoClient client;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private ZomatoClient client;
     private LocationFetcher locationFetcher;
     private RestaurantAdapter adapter;
     private ArrayList<Restaurant> restaurants;
-    private RecyclerView rvRestaurants;
-    private Spinner restaurantSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         // prompt user to turn on location
         PermissionUtil.askUserForLocationPermission(this, REQUEST_LOCATION_PERMISSION);
 
-        rvRestaurants = findViewById(R.id.recyclerView);
+        RecyclerView rvRestaurants = findViewById(R.id.recyclerView);
 
         // add horizontal divider between items
         rvRestaurants.addItemDecoration(new DividerItemDecoration(rvRestaurants.getContext(), DividerItemDecoration.VERTICAL));
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupSpinner() {
-        restaurantSpinner = findViewById(R.id.restaurantFilter);
+        Spinner restaurantSpinner = findViewById(R.id.restaurantFilter);
 
         // setup a click listener for the spinner
         restaurantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -121,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
 
             // if location permission not granted, show a toast
-            if (!PermissionUtil.isLocationPermissionGranted(grantResults)) {
+            if (!PermissionUtil.isPermissionGranted(grantResults)) {
                 Toast.makeText(this,
                         R.string.location_permission_denied,
                         Toast.LENGTH_SHORT).show();
@@ -136,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         // get last known location, add asynchronous callback.
         locationFetcher.getLastKnownLocation(location -> {
             Log.d(LOG_TAG, "received location: " + location.toString());
-            // use the fluent builder to create a configuration for the Zomato API.
+            // add location to the builder
             builder.nearLocation(location);
             // trigger a search, add asynchronous callback.
             client.search(builder.build(), this::displayData);
@@ -161,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.RATING)
                 .withSortOrder(SearchConfiguration.SortOrder.DESC)
                 .limitNumberOfResults(20);
+
         search(builder);
     }
 
@@ -171,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 .sortRestaurantsBy(SearchConfiguration.SortRestaurantsBy.REAL_DISTANCE)
                 .withSortOrder(SearchConfiguration.SortOrder.ASC)
                 .limitNumberOfResults(20);
+
         search(builder);
     }
 

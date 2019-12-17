@@ -11,17 +11,23 @@ public class ReservationViewModel extends AndroidViewModel {
     private ReservationRepository mRepository;
     private LiveData<List<Reservation>> allReservations;
 
-    public ReservationViewModel (Application application) {
+    public ReservationViewModel(Application application) {
         super(application);
         mRepository = new ReservationRepository(application);
         allReservations = mRepository.getAllReservations();
     }
 
-   public LiveData<List<Reservation>> getAllReservations() { return allReservations; }
+    public LiveData<List<Reservation>> getAllReservations() {
+        return allReservations;
+    }
 
-    public void insert(Reservation reservation) {   mRepository.insert(reservation); }
+    public void insert(Reservation reservation) {
+        mRepository.insert(reservation);
+    }
 
-    public void deleteAll() {mRepository.deleteAll();}
+    public void deleteAll() {
+        mRepository.deleteAll();
+    }
 
     public void deleteReservation(Reservation word) {
         mRepository.deleteReservation(word);

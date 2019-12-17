@@ -13,11 +13,17 @@ public class PermissionUtil {
     public static void askUserForLocationPermission(Context context, int permissionResult) {
 
         ActivityCompat.requestPermissions((AppCompatActivity) context,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    permissionResult);
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                permissionResult);
     }
 
-    public static boolean isLocationPermissionGranted(int[] grantResults) {
+    public static void askUserForPhoneCallPermission(Context context, int permissionResult) {
+        ActivityCompat.requestPermissions((AppCompatActivity) context,
+                new String[]{Manifest.permission.CALL_PHONE},
+                permissionResult);
+    }
+
+    public static boolean isPermissionGranted(int[] grantResults) {
         return grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
     }
 
