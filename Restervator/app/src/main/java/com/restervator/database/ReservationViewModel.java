@@ -23,5 +23,7 @@ public class ReservationViewModel extends AndroidViewModel {
 
     public void deleteAll() {mRepository.deleteAll();}
 
-    public void deleteWord(Reservation word) {mRepository.deleteReservation(word);}
+    public void deleteReservation(Reservation word) {
+        mRepository.deleteReservation(word);
+    }
 }
