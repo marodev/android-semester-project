@@ -52,13 +52,13 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/restaurant_address" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/restaurant_city" />
+<!--            <TextView-->
+<!--                android:id="@+id/textView4"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:text="@string/restaurant_city" />-->
 
             <TextView
                 android:id="@+id/restaurantNumber"
@@ -66,7 +66,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/restaurant_phone" />
+                android:text="@string/restaurant_phone"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="nakePhoneCall"
+                android:drawableStart="@drawable/ic_phone_black_24dp"
+                android:drawablePadding="2dp"/>
 
             <View
                 android:id="@+id/line"

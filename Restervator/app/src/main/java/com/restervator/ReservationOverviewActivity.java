@@ -1,5 +1,6 @@
 package com.restervator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -41,17 +42,19 @@ public class ReservationOverviewActivity extends AppCompatActivity {
         if (getIntent().hasExtra(RESERVATION_REPLY)) {
             //get reservation data from intent and store it in the database.
             ArrayList<String> reservationInformation = getIntent().getStringArrayListExtra(RESERVATION_REPLY);
+            int numberOfPerson ;//= Integer.valueOf(reservationInformation.get(4).split("-")[1]);
+            if(reservationInformation.get(4).equals("9+")){
+                numberOfPerson = 9;
+            }else{
+               numberOfPerson  = Integer.valueOf(reservationInformation.get(4).split("-")[1]);
+            }
             Reservation reservation = new Reservation(reservationInformation.get(0),
                     reservationInformation.get(1),
                     reservationInformation.get(2),
                     reservationInformation.get(3),
-                    1);
+                    numberOfPerson);
             reservationViewModel.insert(reservation);
         }
-
-        //        Picasso.get()
-//                .load("https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg")
-//                .into(restaurantImageView);
 
         reservationViewModel.getAllReservations().observe(this, (@Nullable final List<Reservation> reservations) ->
                 adapter.setReservations(reservations) );
@@ -60,7 +63,7 @@ public class ReservationOverviewActivity extends AppCompatActivity {
         ///Functionality to swipe an item to delete it
         ItemTouchHelper helper = new ItemTouchHelper(
                 new ItemTouchHelper.SimpleCallback(0,
-                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                        ItemTouchHelper.LEFT ) {
                     @Override
                     public boolean onMove(RecyclerView recyclerView,
                                           RecyclerView.ViewHolder viewHolder,
@@ -82,6 +85,15 @@ public class ReservationOverviewActivity extends AppCompatActivity {
                 });
 
         helper.attachToRecyclerView(recyclerView);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+
     }
 
 
