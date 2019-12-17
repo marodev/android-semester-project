@@ -1,17 +1,24 @@
 package com.restervator.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.restervator.R;
 import com.restervator.database.Reservation;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.ReservationViewHolder> {
 
@@ -29,16 +36,27 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
         @Override
         public void onBindViewHolder(ReservationViewHolder holder, int position) {
             if (reservations != null) {
-                Reservation current = reservations.get(position);
-                holder.restaurantNameView.setText(current.getName());
+                Reservation reservation = reservations.get(position);
+
+                TextView textView = holder.nameTextView;
+                textView.setText(reservation.getName());
+
+                ImageView firstImage = holder.firstImage;
+                Picasso.get()
+                        .load(reservation.getImage())
+                        .into(firstImage);
+
+                TextView descriptionView = holder.descriptionTextView;
+                descriptionView.setText("Reservation for "+reservation.getNumOfPersons() +
+                        " Person(s) on "+ reservation.getDate() +", "+reservation.getTime() );
             } else {
                 // Covers the case of data not being ready yet.
-                holder.restaurantNameView.setText("No Reservation");
+                holder.nameTextView.setText("No Reservation");
             }
         }
 
-        public void setReservations(List<Reservation> words){
-            reservations = words;
+        public void setReservations(List<Reservation> reservations){
+            this.reservations = reservations;
             notifyDataSetChanged();
         }
 
@@ -57,11 +75,16 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
 
 
         class ReservationViewHolder extends RecyclerView.ViewHolder {
-            private final TextView restaurantNameView;
+            @BindView(R.id.firstimage)
+            ImageView firstImage;
+            @BindView(R.id.name)
+            TextView nameTextView;
+            @BindView(R.id.description)
+            TextView descriptionTextView;
 
             private ReservationViewHolder(View itemView) {
                 super(itemView);
-                restaurantNameView = itemView.findViewById(R.id.name);
+                ButterKnife.bind(this, itemView);
             }
         }
 

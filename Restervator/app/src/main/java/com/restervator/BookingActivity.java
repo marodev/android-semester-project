@@ -24,8 +24,10 @@ public class BookingActivity extends AppCompatActivity {
     public static final String RESERVATION_REPLY =
             "com.restervator.extra.REPLY";
     String restaurantName = "";
+    String restaurantImage = "";
     CalendarView calendarView;
-    MaterialButtonToggleGroup timeButtonGroup;
+    MaterialButtonToggleGroup lunchButtonGroup;
+    MaterialButtonToggleGroup dinnerButtonGroup;
     MaterialButtonToggleGroup personCountButtonGroup;
     String chosenDate;
     String chosenTime;
@@ -38,6 +40,7 @@ public class BookingActivity extends AppCompatActivity {
 
        ArrayList<String> restaurantInformation = getIntent().getStringArrayListExtra(RESTAURANT_REPLY);
        restaurantName = restaurantInformation.get(0);
+       restaurantImage = restaurantInformation.get(3);
 
         TextView restaurantNameView = findViewById(R.id.bookingRestaurantName);
         restaurantNameView.setText(restaurantName);
@@ -45,14 +48,26 @@ public class BookingActivity extends AppCompatActivity {
 
         //Get the selected date whenever a new date is picked in the calendar.
         calendarView = findViewById(R.id.calendarView);
+        calendarView.setMinDate(System.currentTimeMillis());
         calendarView.setOnDateChangeListener((CalendarView view, int year, int month,
                                             int dayOfMonth) ->
-                chosenDate = dayOfMonth +" - " + (month+1) + " - " + year);
+                chosenDate = dayOfMonth +"/" + (month+1) + "/" + year);
 
 
-        //Get the selected time
-        timeButtonGroup = findViewById(R.id.lunch_time_toggle_group);
-        timeButtonGroup.addOnButtonCheckedListener((MaterialButtonToggleGroup group , int checkedId, boolean isChecked) -> {
+        //The lunch and dinner time were separated because the material design toggle button only
+        //aligns items horizontally and did not wrap the items. so since we had 8 different times,
+        // they could not all fit on the screen horizontally and thus we separated them
+        //Gets the selected time chosen for lunch
+        lunchButtonGroup = findViewById(R.id.lunch_time_toggle_group);
+        lunchButtonGroup.addOnButtonCheckedListener((MaterialButtonToggleGroup group , int checkedId, boolean isChecked) -> {
+
+                MaterialButton button = findViewById(checkedId);
+                    chosenTime = button.getText().toString();
+                });
+        //Gets the selected time chosen for dinner
+        dinnerButtonGroup = findViewById(R.id.lunch_time_toggle_group);
+        dinnerButtonGroup.addOnButtonCheckedListener((MaterialButtonToggleGroup group , int checkedId, boolean isChecked) -> {
+
                     MaterialButton button = findViewById(checkedId);
                     chosenTime = button.getText().toString();
                 });
@@ -71,20 +86,25 @@ public class BookingActivity extends AppCompatActivity {
     //add swipe to delete
 
     public void bookRestaurant(View view) {
+        if (chosenDate ==null | chosenTime ==null | numOfPersons ==null){
+            Toast.makeText(this, "You have not selected the date or time ",
+                    Toast.LENGTH_LONG).show();
+        }else{
+            ArrayList<String> reservationInformation = new ArrayList<>();
+            reservationInformation.add(restaurantName);
+            reservationInformation.add(restaurantImage);
+            reservationInformation.add(chosenDate);
+            reservationInformation.add(chosenTime);
+            reservationInformation.add(numOfPersons);
 
-        Toast.makeText(this, restaurantName +" has been reserved",
-                Toast.LENGTH_LONG).show();
+            Toast.makeText(this, restaurantName +" has been reserved",
+                    Toast.LENGTH_LONG).show();
 
-        ArrayList<String> reservationInformation = new ArrayList<>();
-        reservationInformation.add(restaurantName);
-        reservationInformation.add("no image");
-        reservationInformation.add(chosenDate);
-        reservationInformation.add(chosenTime);
-        reservationInformation.add(numOfPersons);
+            Intent intent = new Intent(this, ReservationOverviewActivity.class);
+            intent.putStringArrayListExtra(RESERVATION_REPLY, reservationInformation );
+            startActivity(intent);
+        }
 
-        Intent intent = new Intent(this, ReservationOverviewActivity.class);
-        intent.putStringArrayListExtra(RESERVATION_REPLY, reservationInformation );
-        startActivity(intent);
     }
 
 }

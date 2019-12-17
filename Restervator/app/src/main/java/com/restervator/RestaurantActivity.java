@@ -1,13 +1,20 @@
 package com.restervator;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.restervator.utils.ImageUtil;
@@ -150,4 +157,34 @@ public class RestaurantActivity extends AppCompatActivity {
     }
 
 
+    public void nakePhoneCall(View view) {
+
+        ActivityCompat.requestPermissions(RestaurantActivity.this,
+                new String[]{Manifest.permission.CALL_PHONE},
+                1);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted
+                    TextView phoneNumberView = findViewById(R.id.restaurantNumber);
+                    String number = phoneNumberView.getText().toString();
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:"+number));
+                    startActivity(intent);
+                } else {
+                    // permission denied,
+                    // functionality that depends on this permission.
+                    Toast.makeText(RestaurantActivity.this, "Permission denied to call restaurant", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
+    }
 }
