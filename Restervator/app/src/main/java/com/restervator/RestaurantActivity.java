@@ -48,8 +48,6 @@ public class RestaurantActivity extends AppCompatActivity {
         // inflate view
         setContentView(R.layout.activity_restaurant);
 
-
-
         // Fetching restaurant image, name, and Fab controls
         ArrayList<String> restaurantInformation = getIntent().getStringArrayListExtra(EXTRA_REPLY);
 
