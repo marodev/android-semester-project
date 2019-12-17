@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.ReservationViewHolder> {
 
         private final LayoutInflater mInflater;
-        private List<Reservation> reservations; // Cached copy of words
+    private List<Reservation> reservations; // Cached copy of reservations
 
         public ReservationAdapter(Context context) { mInflater = LayoutInflater.from(context); }
 
