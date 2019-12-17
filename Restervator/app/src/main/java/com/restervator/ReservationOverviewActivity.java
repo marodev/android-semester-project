@@ -88,13 +88,9 @@ public class ReservationOverviewActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed()
-    {
-        super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
-
+    public void onBackPressed() {
+        // go back to MainActivity - Restaurants
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
-
-
 }
