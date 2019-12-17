@@ -62,7 +62,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="0.1km" />
+                        android:text="" />
 
                 </LinearLayout>
 
