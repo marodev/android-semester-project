@@ -2,6 +2,7 @@ package com.restervator.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.restervator.R;
 import com.restervator.RestaurantActivity;
+import com.restervator.location.LocationFetcher;
 import com.restervator.model.domain.Restaurant;
 import com.restervator.utils.ImageUtil;
 
@@ -45,8 +47,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     @Override
     public void onBindViewHolder(RestaurantAdapter.ViewHolder viewHolder, int position) {
+        // add text to the view elements
         Restaurant restaurant = mRestaurants.get(position);
-
         ImageView thumbnailView = viewHolder.firstImage;
         ImageUtil.loadImage(restaurant.getThumbnailUrl(), thumbnailView);
 
@@ -63,8 +65,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         String avgPrice = restaurant.getCurrency() + " " + restaurant.getAvgPriceForTwo();
         avgPriceView.setText(avgPrice);
 
+        TextView distanceView = viewHolder.distanceToUser;
+        Location restaurantLocation = new Location("RandomProvider");
+        restaurantLocation.setLatitude(restaurant.getLatitude());
+        restaurantLocation.setLongitude(restaurant.getLongitude());
+        // calculate distance to user and display as text
+        distanceView.setText(LocationFetcher.getDistanceToLocation(restaurantLocation));
 
-        // TODO: add rating and avgPrice (if needed) to the intentMessage
+        // create array with information to pass to the next activity
         ArrayList<String> intentMessage = new ArrayList<>();
         intentMessage.add(restaurant.getName());
         intentMessage.add(restaurant.getFullAddress());
@@ -73,6 +81,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         intentMessage.add(String.valueOf(restaurant.getLatitude()));
         intentMessage.add(String.valueOf(restaurant.getLongitude()));
 
+        // set item click listener to go to the next activity
         viewHolder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, RestaurantActivity.class);
             intent.putStringArrayListExtra(EXTRA_REPLY, intentMessage);
@@ -99,6 +108,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         RatingBar ratingBar;
         @BindView(R.id.restaurantAvgPrice)
         TextView restaurantAvgPriceView;
+        @BindView(R.id.distanceToUser)
+        TextView distanceToUser;
 
 
         public ViewHolder(View itemView) {
