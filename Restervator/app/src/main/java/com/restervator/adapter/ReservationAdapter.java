@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.restervator.R;
 import com.restervator.database.Reservation;
-import com.squareup.picasso.Picasso;
+import com.restervator.utils.ImageUtil;
 
 import java.util.List;
 
@@ -42,9 +42,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
             textView.setText(reservation.getName());
 
             ImageView firstImage = holder.firstImage;
-            Picasso.get()
-                    .load(reservation.getImage())
-                    .into(firstImage);
+            ImageUtil.loadImage(reservation.getImage(), firstImage);
 
             TextView descriptionView = holder.descriptionTextView;
             String description = "Reservation for " + reservation.getNumOfPersons() +
