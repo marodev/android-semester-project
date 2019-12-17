@@ -42,11 +42,11 @@ public class ReservationOverviewActivity extends AppCompatActivity {
         if (getIntent().hasExtra(RESERVATION_REPLY)) {
             //get reservation data from intent and store it in the database.
             ArrayList<String> reservationInformation = getIntent().getStringArrayListExtra(RESERVATION_REPLY);
-            int numberOfPerson ;//= Integer.valueOf(reservationInformation.get(4).split("-")[1]);
-            if(reservationInformation.get(4).equals("9+")){
+            int numberOfPerson;//= Integer.valueOf(reservationInformation.get(4).split("-")[1]);
+            if (reservationInformation.get(4).equals("9+")) {
                 numberOfPerson = 9;
-            }else{
-               numberOfPerson  = Integer.valueOf(reservationInformation.get(4).split("-")[1]);
+            } else {
+                numberOfPerson = Integer.valueOf(reservationInformation.get(4).split("-")[1]);
             }
             Reservation reservation = new Reservation(reservationInformation.get(0),
                     reservationInformation.get(1),
@@ -57,13 +57,13 @@ public class ReservationOverviewActivity extends AppCompatActivity {
         }
 
         reservationViewModel.getAllReservations().observe(this, (@Nullable final List<Reservation> reservations) ->
-                adapter.setReservations(reservations) );
+                adapter.setReservations(reservations));
 
 
         ///Functionality to swipe an item to delete it
         ItemTouchHelper helper = new ItemTouchHelper(
                 new ItemTouchHelper.SimpleCallback(0,
-                        ItemTouchHelper.LEFT ) {
+                        ItemTouchHelper.LEFT) {
                     @Override
                     public boolean onMove(RecyclerView recyclerView,
                                           RecyclerView.ViewHolder viewHolder,

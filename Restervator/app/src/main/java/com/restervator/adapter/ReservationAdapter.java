@@ -20,71 +20,73 @@ import butterknife.ButterKnife;
 
 public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.ReservationViewHolder> {
 
-        private final LayoutInflater mInflater;
+    private final LayoutInflater mInflater;
     private List<Reservation> reservations; // Cached copy of reservations
 
-        public ReservationAdapter(Context context) { mInflater = LayoutInflater.from(context); }
+    public ReservationAdapter(Context context) {
+        mInflater = LayoutInflater.from(context);
+    }
 
-        @Override
-        public ReservationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
-            return new ReservationViewHolder(itemView);
+    @Override
+    public ReservationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
+        return new ReservationViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(ReservationViewHolder holder, int position) {
+        if (reservations != null) {
+            Reservation reservation = reservations.get(position);
+
+            TextView textView = holder.nameTextView;
+            textView.setText(reservation.getName());
+
+            ImageView firstImage = holder.firstImage;
+            Picasso.get()
+                    .load(reservation.getImage())
+                    .into(firstImage);
+
+            TextView descriptionView = holder.descriptionTextView;
+            String description = "Reservation for " + reservation.getNumOfPersons() +
+                    " Person(s) on " + reservation.getDate() + ", " + reservation.getTime();
+            descriptionView.setText(description);
+        } else {
+            // Covers the case of data not being ready yet.
+            holder.nameTextView.setText(R.string.no_reservation);
         }
+    }
 
-        @Override
-        public void onBindViewHolder(ReservationViewHolder holder, int position) {
-            if (reservations != null) {
-                Reservation reservation = reservations.get(position);
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+        notifyDataSetChanged();
+    }
 
-                TextView textView = holder.nameTextView;
-                textView.setText(reservation.getName());
+    // getItemCount() is called many times, and when it is first called,
+    // reservations has not been updated (means initially, it's null, and we can't return null).
+    @Override
+    public int getItemCount() {
+        if (reservations != null)
+            return reservations.size();
+        else return 0;
+    }
 
-                ImageView firstImage = holder.firstImage;
-                Picasso.get()
-                        .load(reservation.getImage())
-                        .into(firstImage);
+    public Reservation getReservationAtPosition(int position) {
+        return reservations.get(position);
+    }
 
-                TextView descriptionView = holder.descriptionTextView;
-                String description = "Reservation for " + reservation.getNumOfPersons() +
-                        " Person(s) on " + reservation.getDate() + ", " + reservation.getTime();
-                descriptionView.setText(description);
-            } else {
-                // Covers the case of data not being ready yet.
-                holder.nameTextView.setText(R.string.no_reservation);
-            }
+
+    class ReservationViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.firstimage)
+        ImageView firstImage;
+        @BindView(R.id.name)
+        TextView nameTextView;
+        @BindView(R.id.description)
+        TextView descriptionTextView;
+
+        private ReservationViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
         }
-
-        public void setReservations(List<Reservation> reservations){
-            this.reservations = reservations;
-            notifyDataSetChanged();
-        }
-
-        // getItemCount() is called many times, and when it is first called,
-        // reservations has not been updated (means initially, it's null, and we can't return null).
-        @Override
-        public int getItemCount() {
-            if (reservations != null)
-                return reservations.size();
-            else return 0;
-        }
-
-         public Reservation getReservationAtPosition (int position) {
-             return reservations.get(position);
-        }
-
-
-        class ReservationViewHolder extends RecyclerView.ViewHolder {
-            @BindView(R.id.firstimage)
-            ImageView firstImage;
-            @BindView(R.id.name)
-            TextView nameTextView;
-            @BindView(R.id.description)
-            TextView descriptionTextView;
-
-            private ReservationViewHolder(View itemView) {
-                super(itemView);
-                ButterKnife.bind(this, itemView);
-            }
-        }
+    }
 
 }

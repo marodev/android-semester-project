@@ -17,18 +17,20 @@ public class ReservationRepository {
         reservationDao = db.reservationDao();
         allReservations = reservationDao.getAllReservations();
     }
+
     LiveData<List<Reservation>> getAllReservations() {
         return allReservations;
     }
-    public void insert (Reservation reservation) {
+
+    public void insert(Reservation reservation) {
         new insertAsyncTask(reservationDao).execute(reservation);
     }
 
-    public void deleteAll()  {
+    public void deleteAll() {
         new deleteAllReservationsAsyncTask(reservationDao).execute();
     }
 
-    public void deleteReservation(Reservation reservation)  {
+    public void deleteReservation(Reservation reservation) {
         new deleteReservationAsyncTask(reservationDao).execute(reservation);
     }
 

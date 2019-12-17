@@ -12,9 +12,15 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 @Database(entities = {Reservation.class}, version = 1, exportSchema = false)
 public abstract class ReservationRoomDatabase extends RoomDatabase {
 
-    public abstract ReservationDao reservationDao();
     private static ReservationRoomDatabase INSTANCE;
-
+    private static RoomDatabase.Callback sRoomDatabaseCallback =
+            new RoomDatabase.Callback() {
+                @Override
+                public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                    super.onOpen(db);
+                    new PopulateDbAsync(INSTANCE).execute();
+                }
+            };
 
     static ReservationRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -34,14 +40,7 @@ public abstract class ReservationRoomDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static RoomDatabase.Callback sRoomDatabaseCallback =
-            new RoomDatabase.Callback(){
-                @Override
-                public void onOpen (@NonNull SupportSQLiteDatabase db){
-                    super.onOpen(db);
-                    new PopulateDbAsync(INSTANCE).execute();
-                }
-            };
+    public abstract ReservationDao reservationDao();
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
@@ -57,7 +56,7 @@ public abstract class ReservationRoomDatabase extends RoomDatabase {
 
             if (reservationDao.getAnyWord().length < 1) {
                 for (int i = 0; i <= reservations.length - 1; i++) {
-                    Reservation reservation = new Reservation(reservations[0], reservations[1], reservations[2], reservations[3],5);
+                    Reservation reservation = new Reservation(reservations[0], reservations[1], reservations[2], reservations[3], 5);
                     reservationDao.insert(reservation);
                 }
             }

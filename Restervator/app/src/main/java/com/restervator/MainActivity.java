@@ -32,8 +32,8 @@ import static com.restervator.converter.DtoToRestaurantConverter.convertToRestau
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private ZomatoClient client;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private ZomatoClient client;
     private LocationFetcher locationFetcher;
     private RestaurantAdapter adapter;
     private ArrayList<Restaurant> restaurants;

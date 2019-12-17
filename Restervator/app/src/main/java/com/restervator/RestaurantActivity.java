@@ -34,9 +34,8 @@ public class RestaurantActivity extends AppCompatActivity {
 
     public static final String RESTAURANT_REPLY =
             "com.restervator.extra.REPLY";
-
-    private MapView map = null;
     private static final int REQUEST_PHONECALL_PERMISSION = 2;
+    private MapView map = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

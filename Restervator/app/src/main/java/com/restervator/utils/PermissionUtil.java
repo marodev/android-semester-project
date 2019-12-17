@@ -13,8 +13,8 @@ public class PermissionUtil {
     public static void askUserForLocationPermission(Context context, int permissionResult) {
 
         ActivityCompat.requestPermissions((AppCompatActivity) context,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    permissionResult);
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                permissionResult);
     }
 
     public static void askUserForPhoneCallPermission(Context context, int permissionResult) {
