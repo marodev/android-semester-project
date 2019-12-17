@@ -1,12 +1,10 @@
 package com.restervator.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,11 +45,12 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.
                         .into(firstImage);
 
                 TextView descriptionView = holder.descriptionTextView;
-                descriptionView.setText("Reservation for "+reservation.getNumOfPersons() +
-                        " Person(s) on "+ reservation.getDate() +", "+reservation.getTime() );
+                String description = "Reservation for " + reservation.getNumOfPersons() +
+                        " Person(s) on " + reservation.getDate() + ", " + reservation.getTime();
+                descriptionView.setText(description);
             } else {
                 // Covers the case of data not being ready yet.
-                holder.nameTextView.setText("No Reservation");
+                holder.nameTextView.setText(R.string.no_reservation);
             }
         }
 
