@@ -1,9 +1,7 @@
 package com.restervator;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -13,10 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.restervator.utils.ImageUtil;
+import com.restervator.utils.PermissionUtil;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -38,6 +36,7 @@ public class RestaurantActivity extends AppCompatActivity {
             "com.restervator.extra.REPLY";
 
     private MapView map = null;
+    private static final int REQUEST_PHONECALL_PERMISSION = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,32 +157,27 @@ public class RestaurantActivity extends AppCompatActivity {
 
     public void makePhoneCall(View view) {
 
-        ActivityCompat.requestPermissions(RestaurantActivity.this,
-                new String[]{Manifest.permission.CALL_PHONE},
-                1);
+        PermissionUtil.askUserForPhoneCallPermission(this, REQUEST_PHONECALL_PERMISSION);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted
-                    TextView phoneNumberView = findViewById(R.id.restaurantNumber);
-                    String number = phoneNumberView.getText().toString();
-                    Intent intent = new Intent(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse("tel:"+number));
-                    startActivity(intent);
-                } else {
-                    // permission denied,
-                    // functionality that depends on this permission.
-                    Toast.makeText(RestaurantActivity.this, "Permission denied to call restaurant", Toast.LENGTH_SHORT).show();
-                }
-                return;
+        if (requestCode == REQUEST_PHONECALL_PERMISSION) {
+            if (PermissionUtil.isPermissionGranted(grantResults)) {
+                // permission was granted
+                // broadcast intent
+                TextView phoneNumberView = findViewById(R.id.restaurantNumber);
+                String number = phoneNumberView.getText().toString();
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + number));
+                startActivity(intent);
+            } else {
+                // permission denied,
+                // functionality that depends on this permission.
+                Toast.makeText(RestaurantActivity.this, "Permission denied to call restaurant", Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 }

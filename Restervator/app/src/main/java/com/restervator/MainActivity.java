@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
 
             // if location permission not granted, show a toast
-            if (!PermissionUtil.isLocationPermissionGranted(grantResults)) {
+            if (!PermissionUtil.isPermissionGranted(grantResults)) {
                 Toast.makeText(this,
                         R.string.location_permission_denied,
                         Toast.LENGTH_SHORT).show();
