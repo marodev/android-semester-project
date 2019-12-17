@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.squareup.picasso.Picasso;
@@ -55,8 +54,14 @@ public class RestaurantActivity extends AppCompatActivity {
         // Fetching restaurant image, name, and Fab controls
         ArrayList<String> restaurantInformation = getIntent().getStringArrayListExtra(EXTRA_REPLY);
 
+        String restaurantName = restaurantInformation.get(0);
+
+        // dynamically change title
+        setTitle(restaurantName);
+
+        // put the information from the intent into the views
         TextView restaurantNameView = findViewById(R.id.restaurantName);
-        restaurantNameView.setText(restaurantInformation.get(0));
+        restaurantNameView.setText(restaurantName);
 
         TextView restaurantAddressView = findViewById(R.id.restaurantAddress);
         restaurantAddressView.setText(restaurantInformation.get(1));
@@ -64,14 +69,12 @@ public class RestaurantActivity extends AppCompatActivity {
         TextView restaurantNumberView = findViewById(R.id.restaurantNumber);
         restaurantNumberView.setText(restaurantInformation.get(2));
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
-        // http request to fetch image and load into the view
+
         ImageView restaurantImageView = findViewById(R.id.imageView);
-//        Picasso.get()
-//                .load("https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg")
-//                .into(restaurantImageView);
+        // http request to fetch image and load into the view
         Picasso.get()
                 .load(restaurantInformation.get(3))
                 .into(restaurantImageView);

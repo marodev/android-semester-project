@@ -30,8 +30,7 @@
         <activity
             android:name=".BookingActivity"
             android:label="Booking Activity"
-            android:parentActivityName=".RestaurantActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:parentActivityName=".RestaurantActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.restervator.RestaurantActivity" />
@@ -39,8 +38,7 @@
         <activity
             android:name=".RestaurantActivity"
             android:label="Restaurant Activity"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.restervator.MainActivity" />
