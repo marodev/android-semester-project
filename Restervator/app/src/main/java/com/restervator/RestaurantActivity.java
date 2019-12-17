@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -157,7 +156,7 @@ public class RestaurantActivity extends AppCompatActivity {
     }
 
 
-    public void nakePhoneCall(View view) {
+    public void makePhoneCall(View view) {
 
         ActivityCompat.requestPermissions(RestaurantActivity.this,
                 new String[]{Manifest.permission.CALL_PHONE},
@@ -165,7 +164,7 @@ public class RestaurantActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case 1: {
                 // If request is cancelled, the result arrays are empty.
