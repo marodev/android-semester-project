@@ -199,7 +199,6 @@
                     android:text="@string/num_of_persons_9_above" />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
-            ->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
