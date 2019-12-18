@@ -21,10 +21,15 @@ public class LocationFetcher {
     }
 
     public static String getDistanceToLocation(Location location) {
+        int oneKm = 1000;
         double distance = lastKnownLocation.distanceTo(location);
         int roundedDistance = (int) Math.round(distance);
 
-        return "" + roundedDistance / 1000 + " km";
+        if (roundedDistance <= oneKm) {
+            return "" + "0." + Math.round(roundedDistance / 100.0) + " km";
+        }
+
+        return "" + roundedDistance / oneKm + " km";
 
     }
 
