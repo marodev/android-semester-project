@@ -54,13 +54,13 @@
                 android:drawablePadding="3dp"
                 android:text="@string/restaurant_address" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/textView4"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="24dp"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:text="@string/restaurant_city" />-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/textView4"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="24dp"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:text="@string/restaurant_city" />-->
 
             <TextView
                 android:id="@+id/restaurantNumber"
@@ -68,21 +68,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/restaurant_phone"
                 android:clickable="true"
+                android:drawableStart="@drawable/ic_phone_black_24dp"
+                android:drawablePadding="3dp"
                 android:focusable="true"
                 android:onClick="makePhoneCall"
-                android:drawableStart="@drawable/ic_phone_black_24dp"
-                android:drawablePadding="3dp"/>
+                android:text="@string/restaurant_phone" />
 
             <View
                 android:id="@+id/line"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="#eeeeee"
-                android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"/>
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="#eeeeee" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -95,20 +95,37 @@
                 android:textStyle="bold" />
 
 
-                <org.osmdroid.views.MapView
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="80dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:id="@+id/map"
-                    tilesource="Mapnik"
-                    android:layout_width="wrap_content"
-                    android:layout_height="400dp" />
-
-
+            <org.osmdroid.views.MapView
+                android:id="@+id/map"
+                tilesource="Mapnik"
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="80dp" />
         </LinearLayout>
 
-
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/restaurant_content">
+
+        <Button
+            android:id="@+id/fab"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:selectAllOnFocus="true"
+            android:text="@string/book_a_table" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

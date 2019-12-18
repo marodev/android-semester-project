@@ -6,13 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.restervator.utils.ImageUtil;
 import com.restervator.utils.PermissionUtil;
 
@@ -79,7 +79,7 @@ public class RestaurantActivity extends AppCompatActivity {
         initializeMap(Double.valueOf(restaurantInformation.get(4)), Double.valueOf(restaurantInformation.get(5)));
 
         // Fab
-        ExtendedFloatingActionButton fab = findViewById(R.id.fab);
+        Button fab = findViewById(R.id.fab);
 
         // set onclick listener for booking activity and add information about the restaurant
         final Intent intent = new Intent(this, BookingActivity.class);

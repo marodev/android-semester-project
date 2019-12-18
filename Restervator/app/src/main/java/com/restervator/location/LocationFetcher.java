@@ -10,6 +10,7 @@ import com.restervator.utils.PermissionUtil;
 
 public class LocationFetcher {
 
+    private static Location lastKnownLocation = null;
     private final FusedLocationProviderClient mFusedLocationClient;
     private final Context context;
 
@@ -18,8 +19,6 @@ public class LocationFetcher {
         this.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
 
     }
-
-    private static Location lastKnownLocation = null;
 
     public static String getDistanceToLocation(Location location) {
         double distance = lastKnownLocation.distanceTo(location);

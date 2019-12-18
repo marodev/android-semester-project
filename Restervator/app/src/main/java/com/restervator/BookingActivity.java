@@ -45,7 +45,6 @@ public class BookingActivity extends AppCompatActivity {
         restaurantNameView.setText(restaurantName);
 
 
-
         // Get the selected date whenever a new date is picked in the calendar.
         calendarView = findViewById(R.id.calendarView);
 
@@ -71,9 +70,9 @@ public class BookingActivity extends AppCompatActivity {
         // Gets the selected time chosen for dinner
         dinnerButtonGroup = findViewById(R.id.dinner_time_toggle_group);
         dinnerButtonGroup.addOnButtonCheckedListener((MaterialButtonToggleGroup group, int checkedId, boolean isChecked) -> {
-                if (lunchButtonGroup.isSelected()){
-                    lunchButtonGroup.clearChecked();
-                }
+            if (lunchButtonGroup.isSelected()) {
+                lunchButtonGroup.clearChecked();
+            }
             MaterialButton button = findViewById(checkedId);
             chosenTime = button.getText().toString();
         });
