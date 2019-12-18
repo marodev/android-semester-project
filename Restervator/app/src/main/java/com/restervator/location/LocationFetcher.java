@@ -40,7 +40,15 @@ public class LocationFetcher {
         this.mFusedLocationClient.getLastLocation()
                 .addOnSuccessListener((Activity) this.context, location -> {
                     // Got last known location. In some rare situations this can be null.
-                    if (location != null && listener != null) {
+                    // e.g. on an Android emulator
+                    if (location == null) {
+                        // default USI location
+                        location = new Location("Custom Provider");
+                        location.setLatitude(46.0107);
+                        location.setLongitude(8.9581);
+                    }
+
+                    if (listener != null) {
                         lastKnownLocation = location;
                         // route the location response to registered listener.
                         listener.onLocationResponse(location);
